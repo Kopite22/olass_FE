@@ -4,6 +4,37 @@ export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      colors: {
+        primary: {
+          100: '#F3FCE8',
+          200: '#E0F8C5',
+          300: '#CEF5A4',
+          400: '#B9F17F',
+          500: '#ADEE68',
+          600: '#92D54C',
+          700: '#76B04C',
+          800: '#36893B',
+          900: '#154618',
+          950: '#1A2E05',
+        },
+        neutral: {
+          0: '#FFFFFF',
+          25: '#F5F5F5',
+          50: '#E8E8E8',
+          100: '#D9D9D9',
+          200: '#BDBDBD',
+          300: '#A1A1A1',
+          400: '#858585',
+          500: '#696969',
+          600: '#4C4C4C',
+          700: '#383838',
+          800: '#242424',
+          900: '#141415',
+        },
+        alert: {
+          DEFAULT: '#F84A4A',
+        },
+      },
       fontFamily: {
         sans: [
           'Pretendard',
