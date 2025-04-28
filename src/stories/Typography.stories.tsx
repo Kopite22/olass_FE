@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
+import { cn } from '@/lib/utils';
+
 const fontSamples = [
   { name: 'Title 1', className: 'text-title-1', sample: '올라스 Title 1' },
   { name: 'Title 2', className: 'text-title-2', sample: '올라스 Title 2' },
@@ -46,7 +48,7 @@ const TypographyDemo = () => (
     {fontSamples.map(({ name, className, sample }) => (
       <div key={name} className='flex items-end gap-6'>
         <div className='w-32 text-gray-500 text-sm font-mono'>{name}</div>
-        <div className={`font-sans ${className}`}>{sample}</div>
+        <div className={cn(className)}>{sample}</div>
       </div>
     ))}
   </div>

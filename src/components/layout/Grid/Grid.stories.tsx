@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 
-import Grid from '@/components/Grid/Grid';
+import Grid from '@/components/layout/Grid/Grid';
 
 const DEVICE_PRESETS = [
   { label: 'iPhone X (375x635)', width: 375, height: 635 },
