@@ -1,5 +1,100 @@
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css')
+layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-*: initial;
+  --color-primary-100: #f3fce8;
+  --color-primary-200: #e0f8c5;
+  --color-primary-300: #cef5a4;
+  --color-primary-400: #b9f17f;
+  --color-primary-500: #adee68;
+  --color-primary-600: #92d54c;
+  --color-primary-700: #76b04c;
+  --color-primary-800: #36893b;
+  --color-primary-900: #154618;
+  --color-primary-950: #1a2e05;
+
+  --color-neutral-0: #ffffff;
+  --color-neutral-25: #f5f5f5;
+  --color-neutral-50: #e8e8e8;
+  --color-neutral-100: #d9d9d9;
+  --color-neutral-200: #bdbdbd;
+  --color-neutral-300: #a1a1a1;
+  --color-neutral-400: #858585;
+  --color-neutral-500: #696969;
+  --color-neutral-600: #4c4c4c;
+  --color-neutral-700: #383838;
+  --color-neutral-800: #242424;
+  --color-neutral-900: #141415;
+
+  --color-alert: #f84a4a;
+
+  --font-*: initial;
+  --font-sans: Pretendard, ui-sans-serif, system-ui, Apple SD Gothic Neo,
+    AppleGothic, sans-serif;
+
+  --text-*: initial;
+  --text-title-1: 36px;
+  --text-title-1--line-height: 48px;
+  --text-title-1--letter-spacing: -0.027em;
+  --text-title-2: 28px;
+  --text-title-2--line-height: 38px;
+  --text-title-2--letter-spacing: -0.0236em;
+  --text-title-3: 24px;
+  --text-title-3--line-height: 32px;
+  --text-title-3--letter-spacing: -0.023em;
+  --text-heading-1: 22px;
+  --text-heading-1--line-height: 30px;
+  --text-heading-1--letter-spacing: -0.0194em;
+  --text-heading-2: 20px;
+  --text-heading-2--line-height: 28px;
+  --text-heading-2--letter-spacing: -0.012em;
+  --text-headline-1: 18px;
+  --text-headline-1--line-height: 26px;
+  --text-headline-1--letter-spacing: -0.002em;
+  --text-headline-2: 17px;
+  --text-headline-2--line-height: 24px;
+  --text-headline-2--letter-spacing: 0em;
+  --text-body-1: 16px;
+  --text-body-1--line-height: 24px;
+  --text-body-1--letter-spacing: 0.0057em;
+  --text-body-2: 15px;
+  --text-body-2--line-height: 22px;
+  --text-body-2--letter-spacing: 0.0096em;
+  --text-label-1: 14px;
+  --text-label-1--line-height: 20px;
+  --text-label-1--letter-spacing: 0.0145em;
+  --text-label-2: 13px;
+  --text-label-2--line-height: 18px;
+  --text-label-2--letter-spacing: 0.0194em;
+  --text-caption-1: 12px;
+  --text-caption-1--line-height: 16px;
+  --text-caption-1--letter-spacing: 0.0252em;
+  --text-caption-2: 11px;
+  --text-caption-2--line-height: 14px;
+  --text-caption-2--letter-spacing: 0.0311em;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}

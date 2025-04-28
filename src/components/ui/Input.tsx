@@ -10,7 +10,7 @@ export interface InputProps
   error?: boolean;
 }
 
-const helperTextVariant = cva('text-caption-1 font-bold', {
+const helperTextVariant = cva('!text-caption-1 font-bold', {
   variants: {
     error: {
       true: 'text-alert',
@@ -35,10 +35,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             type={type}
             className={cn(
-              'flex h-12 w-full rounded-xl border bg-white px-4 py-3 text-body-1 font-bold text-neutral-900 placeholder:text-neutral-300 focus:outline-hidden disabled:cursor-not-allowed disabled:bg-neutral-25 disabled:text-neutral-300',
+              'flex h-12 w-full rounded-xl border bg-white px-4 py-3 font-bold text-neutral-900 placeholder:text-neutral-300 disabled:cursor-not-allowed disabled:bg-neutral-25 disabled:text-neutral-300',
               error
-                ? 'border-alert focus:ring-alert'
-                : 'border-neutral-100 focus:ring-primary-500',
+                ? 'border-alert focus:outline-alert'
+                : 'border-neutral-100 focus:outline-primary-500',
               className
             )}
             ref={ref}
