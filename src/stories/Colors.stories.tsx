@@ -81,7 +81,7 @@ const ColorDemo = () => (
 );
 
 const meta: Meta<typeof ColorDemo> = {
-  title: 'Foundation/Colors',
+  title: 'Design System/Foundation/Colors',
   component: ColorDemo,
   parameters: {
     layout: 'centered',

@@ -74,7 +74,7 @@ const WithDeviceSelector = () => {
 };
 
 const meta: Meta<typeof WithDeviceSelector> = {
-  title: 'Foundation/Grid',
+  title: 'Design System/Foundation/Grid',
   component: WithDeviceSelector,
   parameters: {
     layout: 'centered',

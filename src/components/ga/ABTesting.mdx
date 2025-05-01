@@ -1,0 +1,432 @@
+import { Meta } from '@storybook/blocks';
+import { ArgsTable } from '@storybook/addon-docs';
+
+<Meta title="Tech/AB Testing/Documentation" />
+
+# Next.js A/B 테스트 시스템
+
+## 소개
+
+이 문서는 Next.js App Router를 사용하는 애플리케이션에서 Google Analytics와 쿠키 기반의 A/B 테스트 시스템을 구현하고 사용하는 방법을 설명합니다.
+
+### 모듈화된 설계
+여러 실험을 동시에 진행하고 쉽게 추가/제거할 수 있는 구조
+
+### GA 통합
+최신 Next.js GA 통합을 통한 실험 데이터 추적
+
+### 미들웨어 기반
+Next.js 미들웨어를 활용한 일관된 사용자 경험 제공
+
+## 설치
+
+### 1. 필요한 패키지 설치
+
+```bash
+npm install @next/third-parties
+```
+
+### 2. 환경 변수 설정
+
+`.env.local` 파일에 Google Analytics ID를 설정합니다:
+
+```
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+```
+
+> **참고**: `NEXT_PUBLIC_` 접두사는 클라이언트 측에서 이 환경 변수에 접근할 수 있도록 합니다. Google Analytics ID는 항상 `NEXT_PUBLIC_GA_ID`와 같은 공개 환경 변수여야 합니다.
+
+## 시스템 구조
+
+A/B 테스트 시스템은 다음과 같은 주요 구성 요소로 이루어져 있습니다:
+
+1. **미들웨어**: 사용자를 실험 변형에 할당하고 쿠키에 저장
+2. **ABTestProvider**: 앱 전체에 실험 상태를 제공하는 React 컨텍스트
+3. **ABTestComponent**: 실험 변형에 따라 다른 UI를 렌더링하는 컴포넌트
+4. **GoogleAnalytics**: GA와의 통합을 처리하는 컴포넌트
+5. **유틸리티**: 실험 구성 및 분석을 위한 유틸리티 함수들
+
+모든 A/B 테스트 관련 파일들은 `src/components/ga` 디렉토리 내에 응집도 높게 구성되어 있습니다:
+
+```
+src/
+  components/
+    ga/
+      abtest.ts           - A/B 테스트 핵심 유틸리티
+      ABTestProvider.tsx  - 컨텍스트 프로바이더 및 컴포넌트
+      analytics.ts        - 분석 유틸리티 함수
+      experiments-config.ts - 실험 구성 정의
+      GoogleAnalytics.tsx - GA 통합 컴포넌트
+```
+
+## 파일 구조
+
+이 A/B 테스트 시스템은 좋은 응집도를 위해 모든 관련 파일이 `src/components/ga` 디렉토리에 함께 위치해 있습니다:
+
+```
+src/
+  app/
+    layout.tsx         - ABTestProvider와 GoogleAnalytics 컴포넌트 포함
+  components/
+    ga/                - A/B 테스트 관련 모든 파일을 포함하는 디렉토리
+      abtest.ts        - 핵심 A/B 테스트 유틸리티 함수
+      ABTestProvider.tsx - 컨텍스트 제공자 및 UI 컴포넌트
+      analytics.ts     - GA 이벤트 전송 유틸리티
+      experiments-config.ts - 실험 구성 정의
+      GoogleAnalytics.tsx - GA 통합 컴포넌트
+  middleware.ts        - 사용자 세션에 실험 할당
+```
+
+## 기본 설정
+
+### 미들웨어 설정
+
+```tsx
+// middleware.ts
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { getExistingExperiments } from './components/ga/abtest';
+import { getExperimentsForPath } from './components/ga/experiments-config';
+
+export function middleware(request: NextRequest) {
+  const response = NextResponse.next();
+  const path = request.nextUrl.pathname;
+
+  // 기존 실험 쿠키 가져오기
+  const experiments = getExistingExperiments(request);
+
+  // 현재 경로에 적용할 실험 가져오기
+  const applicableExperiments = getExperimentsForPath(path);
+
+  // 적용 가능한 각 실험에 대해 처리
+  // ... (변형 할당 로직)
+
+  return response;
+}
+
+export const config = {
+  matcher: [
+    '/',
+    '/products/:path*',
+    // 필요한 다른 경로 추가
+  ],
+};
+```
+
+### 루트 레이아웃에 통합
+
+```tsx
+// app/layout.tsx
+import ABTestProvider from '@/components/ga/ABTestProvider';
+import GoogleAnalytics from '@/components/ga/GoogleAnalytics';
+
+export default function RootLayout({ children }) {
+  const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || '';
+
+  return (
+    <html lang="ko">
+      <body>
+        <ABTestProvider>
+          {children}
+        </ABTestProvider>
+        <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />
+      </body>
+    </html>
+  );
+}
+```
+
+## 실험 구성하기
+
+실험은 `components/ga/experiments-config.ts` 파일에서 중앙 관리됩니다:
+
+```tsx
+// components/ga/experiments-config.ts
+import { ExperimentConfig } from './abtest';
+
+export enum ExperimentType {
+  PRODUCT_DETAIL = 'product-detail-redesign',
+  HOMEPAGE_HERO = 'homepage-hero-redesign',
+  // 추가 실험 타입을 여기에 정의
+}
+
+export const EXPERIMENT_CONFIGS: Record<ExperimentType, ExperimentConfig> = {
+  [ExperimentType.PRODUCT_DETAIL]: {
+    name: ExperimentType.PRODUCT_DETAIL,
+    variants: ['control', 'variant'],
+    weights: [0.8, 0.2], // 80% 컨트롤, 20% 변형
+    dimension: 'dimension2',
+  },
+  // 추가 실험을 여기에 정의
+};
+
+export const ACTIVE_EXPERIMENTS: ExperimentConfig[] = [
+  EXPERIMENT_CONFIGS[ExperimentType.PRODUCT_DETAIL],
+  // 필요에 따라 다른 실험 활성화/비활성화
+];
+```
+
+### 새 실험 추가
+
+새 실험을 추가하려면:
+
+1. `ExperimentType` 열거형에 새 실험 이름 추가
+2. `EXPERIMENT_CONFIGS` 객체에 실험 구성 추가
+3. `ACTIVE_EXPERIMENTS` 배열에 실험 추가 (활성화할 경우)
+4. GA 관리자 페이지에서 해당 실험의 맞춤 측정 기준(dimension) 생성
+
+## 컴포넌트에서 사용하기
+
+### 기본 사용법
+
+```tsx
+import { ABTestComponent } from '@/components/ga/ABTestProvider';
+
+function MyPage() {
+  return (
+    <ABTestComponent
+      experimentName="homepage-hero-redesign"
+      variants={{
+        'control': <OriginalHero />,
+        'variant': <NewHero />
+      }}
+      defaultVariant="control"
+    />
+  );
+}
+```
+
+### 사용자 속성 및 이벤트 추적
+
+```tsx
+import { useABTest } from '@/components/ga/ABTestProvider';
+import { trackEvent, EventCategory } from '@/components/ga/analytics';
+
+function ProductActions({ productId }) {
+  const { isInVariant, trackConversion } = useABTest();
+
+  // 이 사용자가 특정 변형에 있는지 확인
+  const isVariant = isInVariant('product-detail-redesign', 'variant');
+
+  // 전환 이벤트 추적
+  const handlePurchase = () => {
+    // 전환 추적
+    trackConversion('product-detail-redesign', 'purchase', {
+      product_id: productId,
+      value: 29.99
+    });
+
+    // 일반 이벤트 추적
+    trackEvent(EventCategory.CONVERSION, 'purchase_completed', {
+      product_id: productId
+    });
+  };
+
+  return (
+    <div>
+      {/* 변형에 따라 다른 UI 표시 */}
+      {isVariant ? (
+        <NewBuyButton onClick={handlePurchase} />
+      ) : (
+        <StandardBuyButton onClick={handlePurchase} />
+      )}
+    </div>
+  );
+}
+```
+
+## Google Analytics 설정
+
+### 1. GA에서 맞춤 측정 기준 설정
+
+1. GA 관리자 페이지 접속
+2. 속성 > 맞춤 정의 > 맞춤 측정기준 선택
+3. '새 맞춤 측정기준' 클릭
+4. 다음 정보 입력:
+- 측정기준 이름: "AB테스트" (또는 원하는 이름)
+- 범위: "사용자"
+- 사용자 속성 이름은 자동 생성됨(예: dimension2)
+
+### 2. dimension 값 확인 및 코드 업데이트
+
+GA에서 생성된 `dimensionX` 값(예: dimension2)을 복사하여 `experiments-config.ts` 파일의 해당 실험 설정에 붙여넣습니다:
+
+```tsx
+[ExperimentType.PRODUCT_DETAIL]: {
+  ExperimentType.PRODUCT_DETAIL,
+  variants: ['control', 'variant'],
+  weights: [0.8, 0.2],
+  dimension: 'dimension2', // GA에서 할당받은 값
+},
+```
+
+## 고급 기능
+
+### 경로별 실험 적용
+
+```tsx
+export function getExperimentsForPath(path: string): ExperimentConfig[] {
+  // 제품 상세 페이지
+  if (path.startsWith('/products/')) {
+    return [EXPERIMENT_CONFIGS[ExperimentType.PRODUCT_DETAIL]];
+  }
+
+  // 홈페이지
+  if (path === '/' || path === '') {
+    return [EXPERIMENT_CONFIGS[ExperimentType.HOMEPAGE_HERO]];
+  }
+
+  // 기본적으로 빈 배열 반환
+  return [];
+}
+```
+
+### 다중 변형 실험
+
+A/B/C 테스트와 같은 여러 변형을 지원합니다:
+
+```tsx
+[ExperimentType.HOMEPAGE_HERO]: {
+  ExperimentType.HOMEPAGE_HERO,
+  variants: ['control', 'variant-a', 'variant-b'],
+  weights: [0.6, 0.2, 0.2], // 60% 컨트롤, 20% 변형A, 20% 변형B
+  dimension: 'dimension3',
+},
+```
+
+### 사용자 세그먼트화
+
+특정 사용자 그룹에만 실험을 적용하려면 미들웨어를 확장할 수 있습니다:
+
+```tsx
+// 로그인한 사용자에게만 적용
+if (request.cookies.get('user_id')) {
+  // 실험 적용
+}
+
+// 특정 지역의 사용자에게만 적용
+const country = request.geo?.country || '';
+if (country === 'KR') {
+  // 실험 적용
+}
+```
+
+## 모범 사례
+
+### 1. 작은 규모로 시작하기
+
+초기에는 트래픽의 작은 비율(10-20%)만 변형에 할당하는 것이 좋습니다.
+
+### 2. 충분한 데이터 수집 시간 확보
+
+의미 있는 결과를 얻으려면 충분한 샘플 크기가 필요합니다. 최소 1-2주 동안 실험을 실행하세요.
+
+### 3. 통계적 유의성 확인
+
+결과를 비교할 때는 통계적 유의성을 확인하세요. GA에서 제공하는 통계적 유의성 지표를 활용하세요.
+
+### 4. 하나의 변수만 변경하기
+
+테스트당 하나의 변수만 변경하여 어떤 변경이 결과에 영향을 미쳤는지 명확하게 파악하세요.
+
+### 5. 쿠키 정책 준수
+
+A/B 테스트 쿠키는 사용자 추적에 사용되므로, 쿠키 정책과 개인정보 보호 공지를 적절히 업데이트하세요.
+
+## 문제 해결
+
+### 변형이 일관되게 적용되지 않는 경우
+
+1. 쿠키가 올바르게 설정되었는지 확인하세요:
+- 개발자 도구 > 애플리케이션 > 쿠키
+- `ab-experiments` 쿠키가 있는지 확인
+
+2. 미들웨어가 올바르게 실행되는지 확인하세요:
+- 디버그 로그 추가: `console.log('Middleware executed', experiments);`
+
+### GA에서 데이터가 보이지 않는 경우
+
+1. 올바른 dimension이 설정되었는지 확인하세요.
+2. GA가 올바르게 설정되었는지 확인하세요:
+- 개발자 도구 > 네트워크 > `collect` 요청 확인
+- 요청에 dimension 매개변수가 포함되어 있는지 확인
+
+3. 세그먼트가 올바르게 설정되었는지 확인하세요.
+
+## 예제: 제품 상세 페이지 A/B 테스트
+
+다음은 제품 상세 페이지에 A/B 테스트를 적용하는 완전한 예제입니다:
+
+```tsx
+// app/products/[id]/page.tsx
+import { Suspense } from 'react';
+import ProductDetail from './components/ProductDetail';
+import ProductDetailVariant from './components/ProductDetailVariant';
+import { ABTestComponent } from '@/components/ga/ABTestProvider';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import { getProduct } from '@/lib/api';
+
+export default async function ProductPage({ params }) {
+  const product = await getProduct(params.id);
+
+  return (
+    <main>
+      <h1>상품 상세</h1>
+      <Suspense fallback={<LoadingSpinner />}>
+        <ABTestProductDetail product={product} />
+      </Suspense>
+    </main>
+  );
+}
+
+// 클라이언트 컴포넌트
+'use client';
+
+import { ABTestComponent, useABTest } from '@/components/ga/ABTestProvider';
+import { useEffect } from 'react';
+import { trackEvent, EventCategory } from '@/components/ga/analytics';
+
+function ABTestProductDetail({ product }) {
+  const { experiments, trackConversion } = useABTest();
+
+  // 페이지 조회 기록
+  useEffect(() => {
+    trackEvent(EventCategory.IMPRESSION, 'product_detail_view', {
+      product_id: product.id,
+      product_name: product.name,
+      experiment_variant: experiments['product-detail-redesign'] || 'control'
+    });
+  }, [product, experiments]);
+
+  // 전환 기록 함수
+  const handleProductAction = (action) => {
+    trackConversion('product-detail-redesign', action, {
+      product_id: product.id,
+      product_name: product.name
+    });
+  };
+
+  return (
+    <ABTestComponent
+      experimentName="product-detail-redesign"
+      variants={{
+        'control': <ProductDetail
+                     product={product}
+                     onAction={handleProductAction}
+                   />,
+        'variant': <ProductDetailVariant
+                     product={product}
+                     onAction={handleProductAction}
+                   />
+      }}
+      defaultVariant="control"
+    />
+  );
+}
+```
+
+## 결론
+
+A/B 테스트는 사용자 경험과 전환율을 최적화하는 강력한 도구입니다. 이 시스템을 사용하면 Next.js 애플리케이션에서 쉽게 A/B 테스트를 구현하고 분석할 수 있습니다.
+
+더 많은 정보나 도움이 필요하면 개발 팀에 문의하세요.
