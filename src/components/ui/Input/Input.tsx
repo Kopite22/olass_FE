@@ -11,7 +11,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   ref?: Ref<HTMLInputElement>;
 }
 
-const helperTextVariant = cva('!text-caption-1 font-bold', {
+const helperTextVariant = cva('!text-caption-1', {
   variants: {
     error: {
       true: 'text-alert',
@@ -42,7 +42,7 @@ const Input = ({
         <input
           type={type}
           className={cn(
-            'flex h-12 w-full rounded-xl border bg-white px-4 py-3 font-bold text-neutral-900 placeholder:text-neutral-300 disabled:cursor-not-allowed disabled:bg-neutral-25 disabled:text-neutral-300',
+            'flex h-12 w-full rounded-xl border bg-white px-4 py-3 text-neutral-900 placeholder:text-neutral-300 disabled:cursor-not-allowed disabled:bg-neutral-25 disabled:text-neutral-300',
             error
               ? 'border-alert focus:outline-alert'
               : 'border-neutral-100 focus:outline-primary-500',
