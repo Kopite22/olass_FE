@@ -19,11 +19,13 @@ import {
 interface ABTestContextType {
   experiments: Experiments;
   isInVariant: (experimentName: string, variantName: string) => boolean;
-  trackConversion: (
-    experimentName: string,
-    action: string,
-    data?: Record<string, unknown>
-  ) => void | null;
+  trackConversion:
+    | ((
+        experimentName: string,
+        action: string,
+        data?: Record<string, unknown>
+      ) => void)
+    | null;
   loading: boolean;
 }
 
