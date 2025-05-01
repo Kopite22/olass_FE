@@ -23,7 +23,7 @@ interface ABTestContextType {
     experimentName: string,
     action: string,
     data?: Record<string, unknown>
-  ) => void;
+  ) => void | null;
   loading: boolean;
 }
 
