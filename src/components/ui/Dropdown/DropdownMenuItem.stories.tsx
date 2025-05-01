@@ -9,7 +9,7 @@ import {
 } from './Dropdown';
 
 const meta = {
-  title: 'UI/DropdownMenuItem',
+  title: 'UI/Dropdown/DropdownMenuItem',
   component: DropdownMenuItem,
   decorators: [
     (Story) => (
