@@ -55,7 +55,7 @@ const TypographyDemo = () => (
 );
 
 const meta: Meta<typeof TypographyDemo> = {
-  title: 'Foundation/Typography',
+  title: 'Design System/Foundation/Typography',
   component: TypographyDemo,
   parameters: {
     layout: 'centered',

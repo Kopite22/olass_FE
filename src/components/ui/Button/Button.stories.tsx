@@ -4,7 +4,7 @@ import { Plus } from 'lucide-react';
 import { Button } from './Button';
 
 const meta = {
-  title: 'UI/Button',
+  title: 'Design System/UI/Button',
   component: Button,
   tags: ['autodocs'],
   parameters: {

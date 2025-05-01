@@ -3,6 +3,8 @@ import * as React from 'react';
 
 import '@/styles/globals.css';
 
+import GoogleAnalytics from '@/components/ga/GoogleAnalytics';
+
 import { siteConfig } from '@/constant/config';
 
 export const metadata: Metadata = {
@@ -48,9 +50,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || '';
   return (
     <html>
       <body>{children}</body>
+      <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />
     </html>
   );
 }
