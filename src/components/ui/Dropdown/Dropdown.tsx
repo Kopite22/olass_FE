@@ -122,7 +122,7 @@ const DropdownMenuItem = React.forwardRef<
         ref={ref}
         disabled={disabled}
         className={cn(
-          'relative flex cursor-default select-none gap-2 rounded-xl px-3 text-body-1 tracking-[0.57%] outline-none transition-colors',
+          'relative flex cursor-default font-semibold select-none gap-2 rounded-xl px-3 text-body-1 tracking-[0.57%] outline-none transition-colors',
           'py-3',
           alignMap[verticalAlign],
           paddingMap[verticalPadding],
