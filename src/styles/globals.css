@@ -96,4 +96,16 @@ layer(base);
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
+
+  .gradient-background {
+    background: radial-gradient(
+      150.7% 100.67% at 0% 0%,
+      #f8fff0 17.79%,
+      #e0f4ff 63.94%,
+      #ffffff 100%
+    );
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 }

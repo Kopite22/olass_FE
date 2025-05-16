@@ -2,7 +2,7 @@ import { cva } from 'class-variance-authority';
 import * as React from 'react';
 import { InputHTMLAttributes, Ref } from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/className';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;

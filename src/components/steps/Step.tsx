@@ -25,6 +25,7 @@ export const Step = memo(function Step<T extends string = string>({
   // display: none 대신 visibility + position 사용
   return (
     <div
+      className='size-full'
       style={{
         visibility: isActive ? 'visible' : 'hidden',
         position: isActive ? 'static' : 'absolute',

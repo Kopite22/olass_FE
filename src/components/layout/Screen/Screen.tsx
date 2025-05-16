@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/className';
 
 type ScreenProps = React.HTMLAttributes<HTMLDivElement> & {
   /**
