@@ -16,7 +16,6 @@ const colorGroups = [
       { name: '700', className: 'bg-primary-700 text-neutral-0' },
       { name: '800', className: 'bg-primary-800 text-neutral-0' },
       { name: '900', className: 'bg-primary-900 text-neutral-0' },
-      { name: '950', className: 'bg-primary-950 text-neutral-0' },
     ],
   },
   {

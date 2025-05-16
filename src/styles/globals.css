@@ -9,16 +9,15 @@ layer(base);
 
 @theme {
   --color-*: initial;
-  --color-primary-100: #f3fce8;
-  --color-primary-200: #e0f8c5;
-  --color-primary-300: #cef5a4;
-  --color-primary-400: #b9f17f;
-  --color-primary-500: #adee68;
-  --color-primary-600: #92d54c;
-  --color-primary-700: #76b04c;
-  --color-primary-800: #36893b;
-  --color-primary-900: #154618;
-  --color-primary-950: #1a2e05;
+  --color-primary-100: hsla(201, 100%, 94%, 1);
+  --color-primary-200: hsla(201, 100%, 85%, 1);
+  --color-primary-300: hsla(202, 100%, 75%, 1);
+  --color-primary-400: hsla(201, 100%, 60%, 1);
+  --color-primary-500: hsla(206, 100%, 50%, 1);
+  --color-primary-600: hsla(206, 100%, 41%, 1);
+  --color-primary-700: hsla(206, 100%, 33%, 1);
+  --color-primary-800: hsla(205, 100%, 25%, 1);
+  --color-primary-900: hsla(203, 100%, 16%, 1);
 
   --color-neutral-0: #ffffff;
   --color-neutral-25: #f5f5f5;
