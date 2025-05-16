@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/className';
 
 import ArrowRightThickIcon from '@/components/icons/ArrowRightThickIcon';
 import { buttonVariants } from '@/components/ui/Button/Button';

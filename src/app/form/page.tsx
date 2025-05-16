@@ -1,5 +1,7 @@
-const FormPage = () => {
-  return <div>FormPage</div>;
+import FormPage from '@/_pages/form/FormPage';
+
+const Page = () => {
+  return <FormPage />;
 };
 
-export default FormPage;
+export default Page;

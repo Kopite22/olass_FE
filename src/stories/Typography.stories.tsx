@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/className';
 
 const fontSamples = [
   { name: 'Title 1', className: 'text-title-1', sample: '올라스 Title 1' },

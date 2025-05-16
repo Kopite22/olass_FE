@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/className';
 
 import { Screen } from '@/components/layout/Screen';
 import { Step, Steps, useStep } from '@/components/steps';
