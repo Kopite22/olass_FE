@@ -60,3 +60,4 @@ Key settings in tsconfig.json: [tsconfig.json](mdc:tsconfig.json)
 - Styling properties such as colors, fonts, spacing, and animations should primarily be based on values defined in [globals.css](mdc:src/styles/globals.css)
 - Avoid using hardcoded styles that are not declared in the config.
 - Use shared design tokens to ensure consistent UI styling and improve maintainability across the project.
+- Use flex or grid when composing layout. Don't use margin.
