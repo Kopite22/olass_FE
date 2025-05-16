@@ -33,7 +33,8 @@ const ScreenDemo = ({
           <div className='p-4 text-neutral-900'>
             <h3 className='text-heading-1 mb-2'>Screen 컴포넌트</h3>
             <p className='text-body-1'>
-              모바일 디바이스를 위한 컴포넌트로, 너비를 제한하고 가운데 정렬합니다.
+              모바일 디바이스를 위한 컴포넌트로, 너비를 제한하고 가운데
+              정렬합니다.
             </p>
             <div className='h-[200px] bg-primary-100 mt-4 flex items-center justify-center rounded-lg'>
               컨텐츠 영역
@@ -85,4 +86,4 @@ export default meta;
 
 export const Default: StoryObj = {
   render: () => <WithDeviceSelector />,
-}; 
+};
