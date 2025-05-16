@@ -19,12 +19,15 @@ const meta = {
       control: { type: 'radio' },
     },
     color: {
-      options: ['primary', 'assistive'],
+      options: ['primary', 'assistive', 'dark'],
       control: { type: 'radio' },
     },
     size: {
-      options: ['large', 'medium', 'small'],
+      options: ['large', 'medium', 'small', 'fullWidth'],
       control: { type: 'radio' },
+    },
+    isFullWidth: {
+      control: 'boolean',
     },
     disabled: {
       control: 'boolean',
@@ -52,6 +55,9 @@ export const Solid: Story = {
       </Button>
       <Button variant='solid' color='assistive'>
         Assistive
+      </Button>
+      <Button variant='solid' color='dark'>
+        Dark
       </Button>
     </div>
   ),
@@ -92,6 +98,12 @@ export const Sizes: Story = {
         <Button size='small' variant='text'>
           Small
         </Button>
+      </div>
+      <div className='w-full'>
+        <Button size='fullWidth'>Full Width</Button>
+      </div>
+      <div className='w-full'>
+        <Button isFullWidth>Is Full Width</Button>
       </div>
     </div>
   ),
@@ -146,6 +158,9 @@ export const AllVariants: Story = {
           <Button variant='solid' color='assistive'>
             Assistive
           </Button>
+          <Button variant='solid' color='dark'>
+            Dark
+          </Button>
         </div>
       </div>
 
@@ -185,6 +200,18 @@ export const AllVariants: Story = {
           <Button size='small' variant='text'>
             Small
           </Button>
+        </div>
+        <div className='w-full'>
+          <Button size='fullWidth'>Full Width Size</Button>
+        </div>
+      </div>
+
+      <div className='flex flex-col gap-4'>
+        <h3 className='text-heading-1 font-semibold text-neutral-500'>
+          Full Width Property
+        </h3>
+        <div className='w-full'>
+          <Button isFullWidth>Full Width</Button>
         </div>
       </div>
 
