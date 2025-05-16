@@ -53,7 +53,9 @@ export default function RootLayout({
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || '';
   return (
     <html>
-      <body>{children}</body>
+      <body className='bg-neutral-25 w-screen h-screen flex items-center justify-center'>
+        {children}
+      </body>
       <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />
     </html>
   );
