@@ -15,11 +15,17 @@ const buttonVariants = cva(
       color: {
         primary: '',
         assistive: '',
+        dark: '',
       },
       size: {
         large: 'text-body-1 tracking-[0.57%]',
         medium: 'text-body-2 tracking-[0.96%]',
         small: 'text-label-1 tracking-[1.45%]',
+        fullWidth: 'text-body-1 tracking-[0.57%] w-full',
+      },
+      isFullWidth: {
+        true: 'w-full',
+        false: '',
       },
     },
     compoundVariants: [
@@ -28,13 +34,19 @@ const buttonVariants = cva(
         variant: 'solid',
         color: 'primary',
         className:
-          'bg-primary-500 text-neutral-900 hover:bg-primary-600 disabled:bg-neutral-25 disabled:text-neutral-300',
+          'bg-primary-500 text-neutral-0 hover:bg-primary-600 disabled:bg-neutral-25 disabled:text-neutral-300',
       },
       {
         variant: 'solid',
         color: 'assistive',
         className:
           'bg-neutral-25 text-neutral-800 hover:bg-neutral-50 disabled:bg-neutral-100 disabled:text-neutral-300',
+      },
+      {
+        variant: 'solid',
+        color: 'dark',
+        className:
+          'bg-neutral-900 text-neutral-0 hover:bg-neutral-800 disabled:bg-neutral-100 disabled:text-neutral-300',
       },
       // Outlined variants
       {
@@ -74,6 +86,11 @@ const buttonVariants = cva(
         className: 'h-[44px] px-5 rounded-lg',
       },
       {
+        variant: ['solid', 'outlined'],
+        size: 'fullWidth',
+        className: 'h-[56px] px-7 rounded-full',
+      },
+      {
         variant: 'text',
         size: ['medium', 'large'],
         className: 'h-[44px] px-4 rounded-lg',
@@ -88,6 +105,7 @@ const buttonVariants = cva(
       variant: 'solid',
       color: 'primary',
       size: 'medium',
+      isFullWidth: false,
     },
   }
 );
@@ -108,13 +126,16 @@ const Button = ({
   variant,
   color,
   size,
+  isFullWidth,
   children,
   leftIcon,
   rightIcon,
   ...props
 }: ButtonProps) => (
   <button
-    className={cn(buttonVariants({ variant, color, size, className }))}
+    className={cn(
+      buttonVariants({ variant, color, size, isFullWidth, className })
+    )}
     {...props}
   >
     {leftIcon && <span className='mr-1.5'>{leftIcon}</span>}
