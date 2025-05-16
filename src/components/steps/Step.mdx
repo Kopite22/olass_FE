@@ -1,0 +1,321 @@
+import {Meta} from '@storybook/blocks';
+import {ArgsTable} from '@storybook/addon-docs';
+
+<Meta title="Tech/MultiStep/Step" />
+
+# 멀티 스텝 컴포넌트
+
+멀티 스텝 폼 또는 단계적인 UI 흐름을 쉽게 구현할 수 있는 컴포넌트입니다.
+
+## 소개
+
+`Steps`와 `Step` 컴포넌트는 사용자에게 여러 단계로 나누어진 과정을 안내하는 UI를 구현하는데 사용됩니다.
+각 단계의 상태는 자동으로 관리되며, 브라우저의 URL과 히스토리 API와 통합되어 동작합니다.
+
+## 주요 특징
+
+- **TypeScript 지원**: 제네릭을 통한 타입 안전성 제공
+- **컴포넌트 상태 유지**: 모든 단계가 메모리에 유지되어 상태가 보존됨
+- **브라우저 히스토리 통합**: 뒤로가기 버튼 지원
+- **쉬운 API**: 직관적인 hook API로 단계 간 이동 간편화
+- **애니메이션 지원**: Framer Motion을 활용한 애니메이션 기능 (선택 사항)
+
+## 설치 방법
+
+```bash
+# 기본 설치
+npm install @your-org/multi-step
+
+# 애니메이션 지원 시
+npm install framer-motion
+```
+
+## 기본 사용 방법
+
+```tsx
+import { Steps, Step, useStep } from '@your-org/multi-step';
+
+// 단계 정의
+enum FormStep {
+  PersonalInfo = "personalInfo",
+  ContactInfo = "contactInfo",
+  Confirmation = "confirmation",
+}
+
+// 메인 컴포넌트
+function RegistrationForm() {
+  return (
+    <Steps<FormStep> initialStep={FormStep.PersonalInfo}>
+      <Step name={FormStep.PersonalInfo}>
+        <PersonalInfoForm />
+      </Step>
+      <Step name={FormStep.ContactInfo}>
+        <ContactInfoForm />
+      </Step>
+      <Step name={FormStep.Confirmation}>
+        <ConfirmationScreen />
+      </Step>
+    </Steps>
+  );
+}
+
+// 하위 컴포넌트
+function PersonalInfoForm() {
+  const { next } = useStep<FormStep>();
+
+  return (
+    <div>
+      {/* 폼 내용 */}
+      <button onClick={next}>다음</button>
+    </div>
+  );
+}
+```
+
+## 컴포넌트 API
+
+### Steps
+
+멀티 스텝 폼의 컨테이너 역할을 하는 컴포넌트입니다.
+
+<table>
+    <thead>
+    <tr>
+        <th>Prop</th>
+        <th>타입</th>
+        <th>기본값</th>
+        <th>설명</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>initialStep</code></td>
+        <td><code>T</code></td>
+        <td><code>undefined</code></td>
+        <td>초기 활성화 단계</td>
+    </tr>
+    <tr>
+        <td><code>updateUrl</code></td>
+        <td><code>boolean</code></td>
+        <td><code>true</code></td>
+        <td>URL 쿼리 파라미터 업데이트 여부</td>
+    </tr>
+    <tr>
+        <td><code>children</code></td>
+        <td><code>ReactNode</code></td>
+        <td>-</td>
+        <td><code>Step</code> 컴포넌트들</td>
+    </tr>
+    </tbody>
+</table>
+
+### Step
+
+각 단계를 정의하는 컴포넌트입니다.
+
+<table>
+    <thead>
+    <tr>
+        <th>Prop</th>
+        <th>타입</th>
+        <th>기본값</th>
+        <th>설명</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>name</code></td>
+        <td><code>T</code></td>
+        <td>-</td>
+        <td>단계 식별자 (enum 값)</td>
+    </tr>
+    <tr>
+        <td><code>children</code></td>
+        <td><code>ReactNode</code></td>
+        <td>-</td>
+        <td>단계 내용 컴포넌트</td>
+    </tr>
+    </tbody>
+</table>
+
+
+### useStep Hook
+
+단계 이동을 제어하는 hook입니다.
+
+```tsx
+const {
+  currentStep,  // 현재 활성화된 단계 (T)
+  next,         // 다음 단계로 이동하는 함수 () => void
+  prev,         // 이전 단계로 이동하는 함수 () => void
+  goTo,         // 특정 단계로 이동하는 함수 (step: T) => void
+  steps,        // 모든 단계 배열 (T[])
+  currentIndex  // 현재 단계의 인덱스 (number)
+} = useStep<MyStepEnum>();
+```
+
+## 모바일 환경에서 Step 컴포넌트 사용하기
+
+`Screen` 컴포넌트와 함께 사용하면 모바일 환경에 최적화된 멀티스텝 인터페이스를 구현할 수 있습니다.
+
+```tsx
+import { Screen } from '@/components/layout/Screen';
+import { Step, Steps, useStep } from '@/components/steps';
+
+enum FormStep {
+  PersonalInfo = 'personalInfo',
+  ContactInfo = 'contactInfo',
+  Confirmation = 'confirmation',
+}
+
+const MultiStepFormMobile = () => {
+  return (
+    <Screen className="bg-white">
+      <div className="bg-primary-100 py-3 px-4">
+        <h1 className="text-title-2 text-primary-900">멀티스텝 폼</h1>
+      </div>
+      
+      <Steps<FormStep> initialStep={FormStep.PersonalInfo}>
+        <Step name={FormStep.PersonalInfo}>
+          <PersonalInfoForm />
+        </Step>
+        <Step name={FormStep.ContactInfo}>
+          <ContactInfoForm />
+        </Step>
+        <Step name={FormStep.Confirmation}>
+          <ConfirmationScreen />
+        </Step>
+      </Steps>
+    </Screen>
+  );
+};
+```
+
+### 진행 상태 표시 구현
+
+사용자에게 현재 진행 상태를 시각적으로 보여주는 컴포넌트를 추가할 수 있습니다:
+
+```tsx
+const StepProgressBar = ({ steps }: { steps: { id: FormStep; label: string }[] }) => {
+  const { currentStep } = useStep<FormStep>();
+  const currentIndex = steps.findIndex(step => step.id === currentStep);
+
+  return (
+    <div className="px-4 py-3 border-b border-neutral-200">
+      <div className="flex items-center justify-between">
+        {steps.map((step, index) => {
+          const isActive = index === currentIndex;
+          const isCompleted = index < currentIndex;
+          
+          return (
+            <div key={step.id} className="flex flex-col items-center">
+              <div 
+                className={`w-8 h-8 rounded-full flex items-center justify-center mb-1
+                  ${isActive ? 'bg-primary-500 text-white' : 
+                    isCompleted ? 'bg-primary-200 text-primary-800' : 
+                    'bg-neutral-200 text-neutral-500'}`}
+              >
+                {index + 1}
+              </div>
+              <span className="text-xs">{step.label}</span>
+            </div>
+          );
+        })}
+      </div>
+      {/* 진행 바 */}
+      <div className="mt-2 mx-8 h-1 bg-neutral-200 rounded-full">
+        <div 
+          className="h-full bg-primary-500 rounded-full transition-all duration-300" 
+          style={{ width: `${(currentIndex / (steps.length - 1)) * 100}%` }}
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+실제 구현 예제는 Storybook에서 확인할 수 있습니다: `Tech/MultiStep/Step Example` 스토리를 참조하세요.
+
+## 고급 사용법
+
+### 폼 데이터 관리
+
+각 단계별로 수집된 데이터를 관리하려면 외부 상태 관리 라이브러리(React Context, Zustand, Redux 등)와 함께 사용하는 것이 좋습니다.
+
+```tsx
+function RegistrationForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    // 기타 필드들
+  });
+
+  const updateFormData = (data) => {
+    setFormData(prev => ({ ...prev, ...data }));
+  };
+
+  return (
+    <FormDataContext.Provider value={{ formData, updateFormData }}>
+      <Steps<FormStep> initialStep={FormStep.PersonalInfo}>
+        {/* 단계들 */}
+      </Steps>
+    </FormDataContext.Provider>
+  );
+}
+```
+
+### 조건부 단계 처리
+
+특정 조건에 따라 단계를 동적으로 제어하고 싶다면 `goTo` 함수를 활용할 수 있습니다.
+
+```tsx
+function PersonalInfoForm() {
+  const { goTo } = useStep<FormStep>();
+  const { formData } = useFormData();
+
+  const handleNext = () => {
+    if (formData.isCompany) {
+      goTo(FormStep.CompanyInfo);
+    } else {
+      goTo(FormStep.ContactInfo);
+    }
+  };
+
+  return (
+    <div>
+      {/* 폼 내용 */}
+      <button onClick={handleNext}>다음</button>
+    </div>
+  );
+}
+```
+
+### Framer Motion 애니메이션 추가
+
+애니메이션 효과를 원한다면 애니메이션 버전을 사용하세요:
+
+```tsx
+import { Steps, Step } from '@your-org/multi-step/animation';
+
+function AnimatedForm() {
+  return (
+    <Steps<FormStep> initialStep={FormStep.PersonalInfo}>
+      {/* 단계들 - 자동으로 애니메이션 효과 적용 */}
+    </Steps>
+  );
+}
+```
+
+## 주의사항 및 팁
+
+1. **성능 고려사항**: 모든 단계가 렌더링되므로, 매우 복잡한 폼이나 많은 단계가 있는 경우 성능에 영향을 줄 수 있습니다. 이런 경우 React.memo나 최적화 기법을 적절히 활용하세요.
+
+2. **URL 활용**: `updateUrl` 속성을 활용하면 특정 단계로 직접 링크가 가능합니다.
+
+3. **접근성**: 각 단계가 명확히 구분되도록 적절한 ARIA 속성을 추가하는 것이 좋습니다.
+
+4. **반응형 디자인**: 모바일 환경에서도 쉽게 사용할 수 있도록 UI를 설계하세요.
+
+## 커스터마이징
+
+스타일이나 기능을 확장하려면 소스 코드를 복사하여 프로젝트에 맞게 수정하세요. 이 컴포넌트는 확장성을 고려하여 설계되었습니다.
