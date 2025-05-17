@@ -3,17 +3,17 @@ import React, { useState } from 'react';
 
 import { cn } from '@/lib/className';
 
-import { Screen } from '@/components/layout/Screen';
-import { Step, Steps, useStep } from '@/components/steps';
-import { Button, buttonVariants } from '@/components/ui/Button';
-import { Checkbox } from '@/components/ui/Checkbox';
+import { Button, buttonVariants } from '@/components/common/Button';
+import { Checkbox } from '@/components/common/Checkbox';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/Dropdown';
-import { Input } from '@/components/ui/Input';
+} from '@/components/common/Dropdown';
+import { Input } from '@/components/common/Input';
+import { Screen } from '@/components/layout/Screen';
+import { Step, Steps, useStep } from '@/components/steps';
 
 // 예시 스텝 정의
 enum FormStep {
@@ -21,6 +21,20 @@ enum FormStep {
   ContactInfo = 'contactInfo',
   Confirmation = 'confirmation',
 }
+
+// steps 배열 정의 (모든 예제에서 공통으로 사용)
+const stepsList = [
+  FormStep.PersonalInfo,
+  FormStep.ContactInfo,
+  FormStep.Confirmation,
+];
+
+// 스텝 정보 배열 (라벨이 포함된 형태)
+const stepsWithLabels = [
+  { id: FormStep.PersonalInfo, label: '개인 정보' },
+  { id: FormStep.ContactInfo, label: '연락처' },
+  { id: FormStep.Confirmation, label: '확인' },
+];
 
 // 개인 정보 입력 폼
 const PersonalInfoForm = () => {
@@ -276,7 +290,7 @@ const NavigationHeader = () => {
 const MultiStepFormMobile = () => {
   return (
     <Screen className='bg-white'>
-      <Steps<FormStep> initialStep={FormStep.PersonalInfo}>
+      <Steps<FormStep> initialStep={FormStep.PersonalInfo} steps={stepsList}>
         <NavigationHeader />
         <Step name={FormStep.PersonalInfo}>
           <PersonalInfoForm />
@@ -294,18 +308,12 @@ const MultiStepFormMobile = () => {
 
 // 프로그레스 표시줄이 있는 상세 예제
 const MultiStepFormWithProgress = () => {
-  const steps = [
-    { id: FormStep.PersonalInfo, label: '개인 정보' },
-    { id: FormStep.ContactInfo, label: '연락처' },
-    { id: FormStep.Confirmation, label: '확인' },
-  ];
-
   return (
     <Screen className='bg-white'>
-      <Steps<FormStep> initialStep={FormStep.PersonalInfo}>
+      <Steps<FormStep> initialStep={FormStep.PersonalInfo} steps={stepsList}>
         <NavigationHeader />
         {/* 스텝 진행 상태 표시 */}
-        <StepProgressBar steps={steps} />
+        <StepProgressBar steps={stepsWithLabels} />
 
         <Step name={FormStep.PersonalInfo}>
           <PersonalInfoForm />
@@ -386,7 +394,7 @@ const StepProgressBar = ({
 const FreeNavigationExample = () => {
   return (
     <Screen className='bg-white'>
-      <Steps<FormStep> initialStep={FormStep.PersonalInfo}>
+      <Steps<FormStep> initialStep={FormStep.PersonalInfo} steps={stepsList}>
         <div className='bg-primary-100 py-3 px-4 border-b border-primary-200'>
           <h1 className='text-title-2 text-primary-900 mb-3'>자유 이동 예제</h1>
           <StepNavButtons />

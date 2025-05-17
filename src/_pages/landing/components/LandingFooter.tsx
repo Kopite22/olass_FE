@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 import { cn } from '@/lib/className';
 
+import { buttonVariants } from '@/components/common/Button/Button';
 import ArrowRightThickIcon from '@/components/icons/ArrowRightThickIcon';
-import { buttonVariants } from '@/components/ui/Button/Button';
 
 export default function LandingFooter() {
   return (

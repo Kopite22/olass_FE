@@ -1,10 +1,6 @@
-import { Button } from '@/components/ui/Button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from '@/components/ui/Dropdown';
-import { Input } from '@/components/ui/Input';
+'use client';
+
+import { Button } from '@/components/common/Button';
 
 import FormBody from '@/_pages/form/components/FormBody';
 import { FormContainer } from '@/_pages/form/components/FormContainer';
@@ -12,8 +8,12 @@ import FormDescription from '@/_pages/form/components/FormDescription';
 import FormFooter from '@/_pages/form/components/FormFooter';
 import FormHeader from '@/_pages/form/components/FormHeader';
 import FormTitle from '@/_pages/form/components/FormTitle';
+import { useForm } from '@/_pages/form/providers/FormProvider';
+import JobInputDropdown from '@/_pages/form/steps/JobStep/JobInputDropdown';
 
 export default function JobStep() {
+  const { formData, setFormData } = useForm();
+
   return (
     <FormContainer>
       <FormHeader>
@@ -21,15 +21,15 @@ export default function JobStep() {
         <FormDescription>직업을 적어주세요</FormDescription>
       </FormHeader>
       <FormBody>
-        <DropdownMenu open>
-          <Input />
-          <DropdownMenuContent>
-            <DropdownMenuItem label='개발자'>개발자</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <JobInputDropdown
+          selectedJob={formData.job}
+          onSelect={(job) => setFormData({ ...formData, job })}
+        />
       </FormBody>
       <FormFooter>
-        <Button isFullWidth>계속하기</Button>
+        <Button disabled={formData.job === null} isFullWidth>
+          계속하기
+        </Button>
       </FormFooter>
     </FormContainer>
   );

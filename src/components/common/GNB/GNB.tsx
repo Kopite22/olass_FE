@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { Logo } from '@/components/ui/Logo';
+import { Logo } from '@/components/common/Logo';
 
 interface Props {
   trailing?: ReactNode;

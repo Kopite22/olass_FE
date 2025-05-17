@@ -5,24 +5,23 @@ import { StepContext, StepContextProps } from './context';
 interface StepsProps<T extends string = string> {
   children: ReactNode;
   initialStep: T;
+  steps: T[];
   updateUrl?: boolean;
 }
 
 export function Steps<T extends string = string>({
   children,
   initialStep,
+  steps: initialSteps,
   updateUrl = true,
 }: StepsProps<T>) {
   // 스텝 관리
-  const steps = useRef<Set<T>>(new Set());
+  const steps = useRef<Set<T>>(new Set(initialSteps));
   const [currentStep, setCurrentStep] = useState<T>(initialStep);
-  const [, setToggle] = useState(false);
 
   // 스텝 등록 함수
   const registerStep = (stepName: T) => {
     steps.current.add(stepName);
-
-    setToggle((prev) => !prev);
   };
 
   // URL 상태 관리
@@ -79,7 +78,7 @@ export function Steps<T extends string = string>({
   };
 
   return (
-    <StepContext.Provider value={value as unknown as StepContextProps<string>}>
+    <StepContext.Provider value={value as unknown as StepContextProps}>
       <div className='size-full'>{children}</div>
     </StepContext.Provider>
   );
