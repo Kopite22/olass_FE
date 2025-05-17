@@ -29,7 +29,7 @@ export default function JobStep() {
       <FormBody>
         <JobInputDropdown
           selectedJob={formData.job}
-          onSelect={(job) => setFormData({ ...formData, job })}
+          onSelect={(job) => setFormData({ job })}
         />
       </FormBody>
       <FormFooter>

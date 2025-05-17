@@ -5,7 +5,7 @@ import { Job } from '@/apis/asset';
 interface FormState {
   formData: {
     job: Job | null;
-    year: number | null;
+    year: number;
     salary: number | null;
   };
   setFormData: (data: Partial<FormState['formData']>) => void;
@@ -16,7 +16,7 @@ const FormContext = createContext<FormState | null>(null);
 export const FormProvider = ({ children }: PropsWithChildren) => {
   const [formData, setFormData] = useState<FormState['formData']>({
     job: null,
-    year: null,
+    year: 0,
     salary: null,
   });
 

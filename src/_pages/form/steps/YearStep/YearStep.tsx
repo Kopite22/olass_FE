@@ -11,8 +11,13 @@ import FormHeader from '@/_pages/form/components/FormHeader';
 import FormTitle from '@/_pages/form/components/FormTitle';
 import { useForm } from '@/_pages/form/providers/FormProvider';
 
+const getSliderHeading = (value: number) => {
+  if (value === 0) return '신입';
+  return `${value}년차`;
+};
+
 export default function YearStep() {
-  const { formData } = useForm();
+  const { formData, setFormData } = useForm();
 
   return (
     <FormContainer>
@@ -22,7 +27,11 @@ export default function YearStep() {
       </FormHeader>
       <FormBody>
         <LabeledSlider
-          heading='신입'
+          defaultValue={[formData.year]}
+          onValueChange={(value) => {
+            setFormData({ year: value[0] });
+          }}
+          heading={getSliderHeading(formData.year)}
           min={0}
           max={10}
           step={1}
