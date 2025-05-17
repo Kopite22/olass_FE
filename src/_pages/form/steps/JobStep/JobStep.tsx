@@ -38,7 +38,7 @@ export default function JobStep() {
           disabled={formData.job === null}
           isFullWidth
         >
-          계속하기
+          {formData.job === null ? '정보를 입력해주세요' : '계속하기'}
         </Button>
       </FormFooter>
     </FormContainer>

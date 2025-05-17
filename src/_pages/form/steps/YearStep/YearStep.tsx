@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/common/Button';
 import { LabeledSlider } from '@/components/common/Slider';
+import { useStep } from '@/components/steps';
 
 import FormBody from '@/_pages/form/components/FormBody';
 import { FormContainer } from '@/_pages/form/components/FormContainer';
@@ -18,6 +19,7 @@ const getSliderHeading = (value: number) => {
 
 export default function YearStep() {
   const { formData, setFormData } = useForm();
+  const { next } = useStep();
 
   return (
     <FormContainer>
@@ -41,7 +43,7 @@ export default function YearStep() {
         />
       </FormBody>
       <FormFooter>
-        <Button disabled={formData.job === null} isFullWidth>
+        <Button onClick={next} isFullWidth>
           계속하기
         </Button>
       </FormFooter>

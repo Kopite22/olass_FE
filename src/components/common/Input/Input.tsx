@@ -28,7 +28,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     return (
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-2 w-full'>
         {label && (
           <label className='text-label-1 font-semibold text-neutral-700'>
             {label}
@@ -48,7 +48,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
         </div>
-        {helperText && (
+        {helperText !== undefined && (
           <p className={cn(helperTextVariant({ error }))}>{helperText}</p>
         )}
       </div>
