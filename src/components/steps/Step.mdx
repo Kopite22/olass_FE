@@ -42,10 +42,20 @@ enum FormStep {
   Confirmation = "confirmation",
 }
 
+// 스텝 목록 정의
+const stepsList = [
+  FormStep.PersonalInfo,
+  FormStep.ContactInfo, 
+  FormStep.Confirmation
+];
+
 // 메인 컴포넌트
 function RegistrationForm() {
   return (
-    <Steps<FormStep> initialStep={FormStep.PersonalInfo}>
+    <Steps<FormStep> 
+      initialStep={FormStep.PersonalInfo}
+      steps={stepsList}
+    >
       <Step name={FormStep.PersonalInfo}>
         <PersonalInfoForm />
       </Step>
@@ -93,6 +103,12 @@ function PersonalInfoForm() {
         <td><code>T</code></td>
         <td><code>undefined</code></td>
         <td>초기 활성화 단계</td>
+    </tr>
+    <tr>
+        <td><code>steps</code></td>
+        <td><code>T[]</code></td>
+        <td>-</td>
+        <td>단계 목록 배열(필수 속성)</td>
     </tr>
     <tr>
         <td><code>updateUrl</code></td>
@@ -168,6 +184,13 @@ enum FormStep {
   Confirmation = 'confirmation',
 }
 
+// 스텝 목록 정의
+const stepsList = [
+  FormStep.PersonalInfo,
+  FormStep.ContactInfo,
+  FormStep.Confirmation,
+];
+
 const MultiStepFormMobile = () => {
   return (
     <Screen className="bg-white">
@@ -175,7 +198,10 @@ const MultiStepFormMobile = () => {
         <h1 className="text-title-2 text-primary-900">멀티스텝 폼</h1>
       </div>
       
-      <Steps<FormStep> initialStep={FormStep.PersonalInfo}>
+      <Steps<FormStep> 
+        initialStep={FormStep.PersonalInfo}
+        steps={stepsList}
+      >
         <Step name={FormStep.PersonalInfo}>
           <PersonalInfoForm />
         </Step>
@@ -254,9 +280,19 @@ function RegistrationForm() {
     setFormData(prev => ({ ...prev, ...data }));
   };
 
+  // 스텝 목록 정의
+  const stepsList = [
+    FormStep.PersonalInfo,
+    FormStep.ContactInfo,
+    FormStep.Confirmation,
+  ];
+
   return (
     <FormDataContext.Provider value={{ formData, updateFormData }}>
-      <Steps<FormStep> initialStep={FormStep.PersonalInfo}>
+      <Steps<FormStep> 
+        initialStep={FormStep.PersonalInfo}
+        steps={stepsList}
+      >
         {/* 단계들 */}
       </Steps>
     </FormDataContext.Provider>
@@ -297,9 +333,19 @@ function PersonalInfoForm() {
 ```tsx
 import { Steps, Step } from '@your-org/multi-step/animation';
 
+// 스텝 목록 정의
+const stepsList = [
+  FormStep.PersonalInfo,
+  FormStep.ContactInfo,
+  FormStep.Confirmation,
+];
+
 function AnimatedForm() {
   return (
-    <Steps<FormStep> initialStep={FormStep.PersonalInfo}>
+    <Steps<FormStep> 
+      initialStep={FormStep.PersonalInfo}
+      steps={stepsList}
+    >
       {/* 단계들 - 자동으로 애니메이션 효과 적용 */}
     </Steps>
   );

@@ -1,5 +1,5 @@
 import { type VariantProps, cva } from 'class-variance-authority';
-import { ButtonHTMLAttributes, ReactNode, Ref } from 'react';
+import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 
 import { cn } from '@/lib/className';
 
@@ -118,30 +118,35 @@ interface ButtonProps
   children: ReactNode;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
-  ref?: Ref<HTMLButtonElement>;
 }
 
-const Button = ({
-  className,
-  variant,
-  color,
-  size,
-  isFullWidth,
-  children,
-  leftIcon,
-  rightIcon,
-  ...props
-}: ButtonProps) => (
-  <button
-    className={cn(
-      buttonVariants({ variant, color, size, isFullWidth, className })
-    )}
-    {...props}
-  >
-    {leftIcon && <span className='mr-1.5'>{leftIcon}</span>}
-    {children}
-    {rightIcon && <span className='ml-1.5'>{rightIcon}</span>}
-  </button>
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      className,
+      variant,
+      color,
+      size,
+      isFullWidth,
+      children,
+      leftIcon,
+      rightIcon,
+      ...props
+    }: ButtonProps,
+    ref
+  ) => (
+    <button
+      ref={ref}
+      className={cn(
+        buttonVariants({ variant, color, size, isFullWidth, className })
+      )}
+      {...props}
+    >
+      {leftIcon && <span className='mr-1.5'>{leftIcon}</span>}
+      {children}
+      {rightIcon && <span className='ml-1.5'>{rightIcon}</span>}
+    </button>
+  )
 );
 
 Button.displayName = 'Button';

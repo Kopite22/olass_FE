@@ -10,9 +10,12 @@ enum MyStep {
   cForm = 'cForm',
 }
 
+// steps 배열 정의
+const stepsList = [MyStep.aForm, MyStep.bForm, MyStep.cForm];
+
 export function MultiStepFormExample() {
   return (
-    <Steps<MyStep> initialStep={MyStep.aForm}>
+    <Steps<MyStep> initialStep={MyStep.aForm} steps={stepsList}>
       <Step name={MyStep.aForm}>
         <ComponentA />
       </Step>

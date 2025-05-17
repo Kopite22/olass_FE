@@ -1,3 +1,4 @@
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Metadata } from 'next';
 import * as React from 'react';
 
@@ -6,6 +7,8 @@ import '@/styles/globals.css';
 import GoogleAnalytics from '@/components/ga/GoogleAnalytics';
 
 import { siteConfig } from '@/constant/config';
+import { GA_MEASUREMENT_ID } from '@/constant/env';
+import QueryClientProvider from '@/providers/QueryClientProvider';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -50,11 +53,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || '';
   return (
     <html>
       <body className='bg-neutral-25 w-screen h-screen flex items-center justify-center'>
-        {children}
+        <QueryClientProvider>
+          {children}
+          <ReactQueryDevtools initialIsOpen />
+        </QueryClientProvider>
       </body>
       <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />
     </html>

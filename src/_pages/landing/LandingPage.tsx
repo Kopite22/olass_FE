@@ -1,15 +1,19 @@
 'use client';
 
-import * as React from 'react';
+import { usePrefetchQuery } from '@tanstack/react-query';
 
+import { GNB } from '@/components/common/GNB';
 import Screen from '@/components/layout/Screen/Screen';
-import { GNB } from '@/components/ui/GNB';
+
+import { assetQueryKeys } from '@/apis/asset';
 
 import LandingFooter from './components/LandingFooter';
 import LandingImage from './components/LandingImage';
 import LandingText from './components/LandingText';
 
 export default function LandingPage() {
+  usePrefetchQuery(assetQueryKeys.getAllJobs());
+
   return (
     <Screen className='flex flex-col justify-center gap-8 bg-neutral-0'>
       <GNB />
