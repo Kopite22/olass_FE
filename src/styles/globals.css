@@ -108,4 +108,8 @@ layer(base);
     background-position: center;
     background-repeat: no-repeat;
   }
+
+  .slider-thumb-shadow {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.16);
+  }
 }

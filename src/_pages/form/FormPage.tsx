@@ -5,11 +5,13 @@ import ShareIcon from '@/components/icons/ShareIcon';
 import Screen from '@/components/layout/Screen';
 import { Step, Steps } from '@/components/steps';
 
+import BackStepButton from '@/_pages/form/components/BackStepButton';
 import FormCard from '@/_pages/form/components/FormCard';
 import FormProgress from '@/_pages/form/components/FormProgress';
 import { FormSteps } from '@/_pages/form/constants/formSteps';
 import { FormProvider } from '@/_pages/form/providers/FormProvider';
 import JobStep from '@/_pages/form/steps/JobStep';
+import YearStep from '@/_pages/form/steps/YearStep';
 
 export default function FormPage() {
   return (
@@ -19,9 +21,15 @@ export default function FormPage() {
         <FormProvider>
           <Steps steps={Object.values(FormSteps)} initialStep={FormSteps.Job}>
             <FormCard>
-              <FormProgress />
+              <div className='flex flex-col gap-[18px]'>
+                <BackStepButton />
+                <FormProgress />
+              </div>
               <Step name={FormSteps.Job}>
                 <JobStep />
+              </Step>
+              <Step name={FormSteps.Year}>
+                <YearStep />
               </Step>
             </FormCard>
           </Steps>
