@@ -11,6 +11,7 @@ import FormProgress from '@/_pages/form/components/FormProgress';
 import { FormSteps } from '@/_pages/form/constants/formSteps';
 import { FormProvider } from '@/_pages/form/providers/FormProvider';
 import JobStep from '@/_pages/form/steps/JobStep';
+import SalaryStep from '@/_pages/form/steps/SalaryStep';
 import YearStep from '@/_pages/form/steps/YearStep';
 
 export default function FormPage() {
@@ -30,6 +31,9 @@ export default function FormPage() {
               </Step>
               <Step name={FormSteps.Year}>
                 <YearStep />
+              </Step>
+              <Step name={FormSteps.Salary}>
+                <SalaryStep />
               </Step>
             </FormCard>
           </Steps>
