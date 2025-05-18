@@ -3,7 +3,7 @@
 import { usePrefetchQuery } from '@tanstack/react-query';
 
 import { GNB } from '@/components/common/GNB';
-import Screen from '@/components/layout/Screen/Screen';
+import { Screen } from '@/components/layout/Screen';
 
 import { assetQueryKeys } from '@/apis/asset';
 

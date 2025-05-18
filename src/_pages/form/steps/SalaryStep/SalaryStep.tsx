@@ -1,7 +1,8 @@
 'use client';
 
+import { useState } from 'react';
+
 import { Button } from '@/components/common/Button';
-import { Input } from '@/components/common/Input';
 
 import FormBody from '@/_pages/form/components/FormBody';
 import { FormContainer } from '@/_pages/form/components/FormContainer';
@@ -9,8 +10,17 @@ import FormDescription from '@/_pages/form/components/FormDescription';
 import FormFooter from '@/_pages/form/components/FormFooter';
 import FormHeader from '@/_pages/form/components/FormHeader';
 import FormTitle from '@/_pages/form/components/FormTitle';
+import { useForm } from '@/_pages/form/providers/FormProvider';
+import SalaryInput from '@/_pages/form/steps/SalaryStep/SalaryInput';
 
 export default function SalaryStep() {
+  const { formData, setFormData } = useForm();
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSalaryChange = (value: number) => {
+    setFormData({ salary: value });
+  };
+
   return (
     <FormContainer>
       <FormHeader>
@@ -18,13 +28,17 @@ export default function SalaryStep() {
         <FormDescription>세전 기준으로 입력해주세요</FormDescription>
       </FormHeader>
       <FormBody>
-        <div className='flex h-72 flex-row w-full gap-2.5 items-start'>
-          <Input helperText='asdfasdf' />
-          <span className='shrink-0 pt-2.5'>만원</span>
-        </div>
+        <SalaryInput
+          error={error}
+          setError={setError}
+          salary={formData.salary}
+          onSalaryChange={handleSalaryChange}
+        />
       </FormBody>
       <FormFooter>
-        <Button isFullWidth>계속하기</Button>
+        <Button disabled={error !== null} size='large' isFullWidth>
+          내 연봉 위치 확인하기
+        </Button>
       </FormFooter>
     </FormContainer>
   );

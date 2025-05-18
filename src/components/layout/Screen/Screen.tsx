@@ -19,7 +19,7 @@ const Screen = ({
   return (
     <div
       className={cn(
-        'mx-auto h-full w-full max-w-lg max-h-[1000px]',
+        'mx-auto h-screen w-screen max-w-lg overflow-hidden',
         hasSafeArea &&
           'pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]',
         className

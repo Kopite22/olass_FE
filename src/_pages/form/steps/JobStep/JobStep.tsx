@@ -34,6 +34,7 @@ export default function JobStep() {
       </FormBody>
       <FormFooter>
         <Button
+          size='large'
           onClick={handleContinue}
           disabled={formData.job === null}
           isFullWidth
