@@ -43,7 +43,7 @@ export default function YearStep() {
         />
       </FormBody>
       <FormFooter>
-        <Button onClick={next} isFullWidth>
+        <Button size='large' onClick={next} isFullWidth>
           계속하기
         </Button>
       </FormFooter>

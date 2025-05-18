@@ -6,7 +6,7 @@ import { cn } from '@/lib/className';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  helperText?: string;
+  helperText?: string | null;
   error?: boolean;
 }
 
