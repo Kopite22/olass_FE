@@ -9,7 +9,7 @@ const noop = () => {
 };
 
 const meta = {
-  title: 'Components/Common/LocaleNumberInput',
+  title: 'Design system/UI/LocaleNumberInput',
   component: LocaleNumberInput,
   parameters: {
     layout: 'centered',
