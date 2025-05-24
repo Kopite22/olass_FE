@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import { Button } from '@/components/common/Button';
+import { type ValidationError } from '@/components/common/LocaleNumberInput';
 
 import FormBody from '@/_pages/form/components/FormBody';
 import { FormContainer } from '@/_pages/form/components/FormContainer';
@@ -15,10 +16,14 @@ import SalaryInput from '@/_pages/form/steps/SalaryStep/SalaryInput';
 
 export default function SalaryStep() {
   const { formData, setFormData } = useForm();
-  const [error, setError] = useState<string | null>(null);
+  const [isValid, setIsValid] = useState(false);
 
   const handleSalaryChange = (value: number) => {
     setFormData({ salary: value });
+  };
+
+  const handleError = (_error: ValidationError | null, valid: boolean) => {
+    setIsValid(valid);
   };
 
   return (
@@ -29,14 +34,13 @@ export default function SalaryStep() {
       </FormHeader>
       <FormBody>
         <SalaryInput
-          error={error}
-          setError={setError}
           salary={formData.salary}
           onSalaryChange={handleSalaryChange}
+          onError={handleError}
         />
       </FormBody>
       <FormFooter>
-        <Button disabled={error !== null} size='large' isFullWidth>
+        <Button disabled={!isValid} size='large' isFullWidth>
           내 연봉 위치 확인하기
         </Button>
       </FormFooter>
