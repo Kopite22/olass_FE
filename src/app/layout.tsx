@@ -55,7 +55,7 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body className='bg-neutral-25 w-screen h-screen flex items-center justify-center'>
+      <body className='bg-neutral-25 w-dvw h-dvh flex items-center justify-center'>
         <QueryClientProvider>
           {children}
           <ReactQueryDevtools initialIsOpen />
