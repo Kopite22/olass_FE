@@ -5,13 +5,13 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FloatingActionButton } from '@/components/common/FloatingActionButton';
+import FormBody from '@/components/common/Form/FormBody';
+import { FormContainer } from '@/components/common/Form/FormContainer';
+import FormDescription from '@/components/common/Form/FormDescription';
+import FormHeader from '@/components/common/Form/FormHeader';
+import FormTitle from '@/components/common/Form/FormTitle';
 import { type ValidationError } from '@/components/common/LocaleNumberInput';
 
-import FormBody from '@/_pages/salary-compare-form/components/FormBody';
-import { FormContainer } from '@/_pages/salary-compare-form/components/FormContainer';
-import FormDescription from '@/_pages/salary-compare-form/components/FormDescription';
-import FormHeader from '@/_pages/salary-compare-form/components/FormHeader';
-import FormTitle from '@/_pages/salary-compare-form/components/FormTitle';
 import { useForm } from '@/_pages/salary-compare-form/providers/FormProvider';
 import SalaryInput from '@/_pages/salary-compare-form/steps/SalaryStep/SalaryInput';
 

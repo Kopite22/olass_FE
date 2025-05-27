@@ -1,13 +1,13 @@
 'use client';
 
+import FormCard from '@/components/common/Form/FormCard';
+import FormProgress from '@/components/common/Form/FormProgress';
 import { GNB } from '@/components/common/GNB';
 import ShareIcon from '@/components/icons/ShareIcon';
 import { Screen } from '@/components/layout/Screen';
 import { Step, Steps } from '@/components/steps';
+import BackStepButton from '@/components/steps/BackStepButton';
 
-import BackStepButton from '@/_pages/salary-compare-form/components/BackStepButton';
-import FormCard from '@/_pages/salary-compare-form/components/FormCard';
-import FormProgress from '@/_pages/salary-compare-form/components/FormProgress';
 import { FormSteps } from '@/_pages/salary-compare-form/constants/formSteps';
 import { FormProvider } from '@/_pages/salary-compare-form/providers/FormProvider';
 import JobStep from '@/_pages/salary-compare-form/steps/JobStep';
