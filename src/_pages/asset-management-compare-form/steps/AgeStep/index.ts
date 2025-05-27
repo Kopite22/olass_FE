@@ -1,1 +1,1 @@
-export { default } from './AgeStep'; 
+export { default } from './AgeStep';

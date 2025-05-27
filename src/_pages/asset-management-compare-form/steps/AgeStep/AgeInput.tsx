@@ -70,4 +70,4 @@ const AgeInput: FC<Props> = ({ age, onAgeChange, onError }) => {
   );
 };
 
-export default AgeInput; 
+export default AgeInput;
