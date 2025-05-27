@@ -48,7 +48,6 @@ const FloatingActionButton = forwardRef<
     const [keyboardHeight, setKeyboardHeight] = useState(0);
 
     useEffect(() => {
-      // iOS Safari 및 모바일 키보드 대응
       const handleResize = () => {
         if (typeof window === 'undefined') return;
 
@@ -100,7 +99,7 @@ const FloatingActionButton = forwardRef<
     }, []);
 
     const bottomPosition =
-      keyboardHeight > 0 ? keyboardHeight + bottomOffset : bottomOffset;
+      keyboardHeight > 0 ? keyboardHeight - 24 : bottomOffset;
 
     return (
       <div

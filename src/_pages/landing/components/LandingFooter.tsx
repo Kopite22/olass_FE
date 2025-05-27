@@ -22,7 +22,7 @@ export default function LandingFooter() {
               isFullWidth: true,
             })
           )}
-          href='/form'
+          href='/salary-compare-form'
         >
           <div className='flex items-center justify-center gap-1.5'>
             1분 안에 내 연봉 위치 보기

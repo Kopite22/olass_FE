@@ -98,6 +98,7 @@ const LocaleNumberInput = React.forwardRef<
         ref={ref}
         type='text'
         inputMode='numeric'
+        pattern='[0-9]*'
         value={displayValue}
         onChange={handleInputChange}
         onFocus={combinedHandleFocus}
