@@ -1,16 +1,16 @@
 'use client';
 
 import { Button } from '@/components/common/Button';
+import FormBody from '@/components/common/Form/FormBody';
+import { FormContainer } from '@/components/common/Form/FormContainer';
+import FormDescription from '@/components/common/Form/FormDescription';
+import FormFooter from '@/components/common/Form/FormFooter';
+import FormHeader from '@/components/common/Form/FormHeader';
+import FormTitle from '@/components/common/Form/FormTitle';
 import { LabeledSlider } from '@/components/common/Slider';
 import { useStep } from '@/components/steps';
 
-import FormBody from '@/_pages/salaryCompareForm/components/FormBody';
-import { FormContainer } from '@/_pages/salaryCompareForm/components/FormContainer';
-import FormDescription from '@/_pages/salaryCompareForm/components/FormDescription';
-import FormFooter from '@/_pages/salaryCompareForm/components/FormFooter';
-import FormHeader from '@/_pages/salaryCompareForm/components/FormHeader';
-import FormTitle from '@/_pages/salaryCompareForm/components/FormTitle';
-import { useForm } from '@/_pages/salaryCompareForm/providers/FormProvider';
+import { useForm } from '@/_pages/salary-compare-form/providers/FormProvider';
 
 const getSliderHeading = (value: number) => {
   if (value === 0) return '신입';

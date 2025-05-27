@@ -5,15 +5,15 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FloatingActionButton } from '@/components/common/FloatingActionButton';
+import FormBody from '@/components/common/Form/FormBody';
+import { FormContainer } from '@/components/common/Form/FormContainer';
+import FormDescription from '@/components/common/Form/FormDescription';
+import FormHeader from '@/components/common/Form/FormHeader';
+import FormTitle from '@/components/common/Form/FormTitle';
 import { type ValidationError } from '@/components/common/LocaleNumberInput';
 
-import FormBody from '@/_pages/salaryCompareForm/components/FormBody';
-import { FormContainer } from '@/_pages/salaryCompareForm/components/FormContainer';
-import FormDescription from '@/_pages/salaryCompareForm/components/FormDescription';
-import FormHeader from '@/_pages/salaryCompareForm/components/FormHeader';
-import FormTitle from '@/_pages/salaryCompareForm/components/FormTitle';
-import { useForm } from '@/_pages/salaryCompareForm/providers/FormProvider';
-import SalaryInput from '@/_pages/salaryCompareForm/steps/SalaryStep/SalaryInput';
+import { useForm } from '@/_pages/salary-compare-form/providers/FormProvider';
+import SalaryInput from '@/_pages/salary-compare-form/steps/SalaryStep/SalaryInput';
 
 export default function SalaryStep() {
   const { formData, setFormData } = useForm();

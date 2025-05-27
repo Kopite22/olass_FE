@@ -1,5 +1,5 @@
 import ArrowLeftIcon from '@/components/icons/ArrowLeftIcon';
-import { useStep } from '@/components/steps';
+import { useStep } from '@/components/steps/index';
 
 const BackStepButton = () => {
   const { prev, currentIndex } = useStep();
