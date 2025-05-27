@@ -1,8 +1,9 @@
 'use client';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 
-import { Button } from '@/components/common/Button';
+import { buttonVariants } from '@/components/common/Button';
 import { GNB } from '@/components/common/GNB';
 import ShareIcon from '@/components/icons/ShareIcon';
 import { Screen } from '@/components/layout/Screen';
@@ -21,10 +22,6 @@ export default function SalaryResultPage(body: SalaryResultPageProps) {
   const { salary, higherAmount, lowerAmount, avgAmount } = data;
   const comparisonResult =
     salary > avgAmount ? 'above' : salary < avgAmount ? 'below' : 'equal';
-
-  const handleNextStep = () => {
-    // 다음 단계로 이동하는 로직
-  };
 
   const handleShare = () => {
     // 공유 기능 구현
@@ -67,7 +64,11 @@ export default function SalaryResultPage(body: SalaryResultPageProps) {
             </p>
 
             <div className='w-full px-5'>
-              <Button size='fullWidth' onClick={handleNextStep}>
+              <Link
+                className={buttonVariants({ size: 'fullWidth' })}
+                href='/asset-management-compare-form'
+                prefetch
+              >
                 <div className='flex items-center justify-center gap-1.5'>
                   다음 질문으로 가기
                   <svg
@@ -83,7 +84,7 @@ export default function SalaryResultPage(body: SalaryResultPageProps) {
                     />
                   </svg>
                 </div>
-              </Button>
+              </Link>
             </div>
           </div>
         </div>
