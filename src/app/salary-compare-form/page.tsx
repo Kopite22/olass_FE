@@ -1,4 +1,4 @@
-import SalaryCompareFormPage from '@/_pages/salaryCompareForm/SalaryCompareFormPage';
+import SalaryCompareFormPage from '@/_pages/salary-compare-form/SalaryCompareFormPage';
 
 const Page = () => {
   return <SalaryCompareFormPage />;

@@ -3,14 +3,14 @@
 import { Button } from '@/components/common/Button';
 import { useStep } from '@/components/steps';
 
-import FormBody from '@/_pages/salaryCompareForm/components/FormBody';
-import { FormContainer } from '@/_pages/salaryCompareForm/components/FormContainer';
-import FormDescription from '@/_pages/salaryCompareForm/components/FormDescription';
-import FormFooter from '@/_pages/salaryCompareForm/components/FormFooter';
-import FormHeader from '@/_pages/salaryCompareForm/components/FormHeader';
-import FormTitle from '@/_pages/salaryCompareForm/components/FormTitle';
-import { useForm } from '@/_pages/salaryCompareForm/providers/FormProvider';
-import JobInputDropdown from '@/_pages/salaryCompareForm/steps/JobStep/JobInputDropdown';
+import FormBody from '@/_pages/salary-compare-form/components/FormBody';
+import { FormContainer } from '@/_pages/salary-compare-form/components/FormContainer';
+import FormDescription from '@/_pages/salary-compare-form/components/FormDescription';
+import FormFooter from '@/_pages/salary-compare-form/components/FormFooter';
+import FormHeader from '@/_pages/salary-compare-form/components/FormHeader';
+import FormTitle from '@/_pages/salary-compare-form/components/FormTitle';
+import { useForm } from '@/_pages/salary-compare-form/providers/FormProvider';
+import JobInputDropdown from '@/_pages/salary-compare-form/steps/JobStep/JobInputDropdown';
 
 export default function JobStep() {
   const { formData, setFormData } = useForm();
