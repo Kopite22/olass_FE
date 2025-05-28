@@ -1,133 +1,181 @@
-# Next.js + Tailwind CSS + TypeScript Starter and Boilerplate
+# Next.js TypeScript Tailwind Starter
 
-<div align="center">
-  <h2>🔋 ts-nextjs-tailwind-starter</h2>
-  <p>Next.js + Tailwind CSS + TypeScript starter packed with useful development features.</p>
-  <p>Made by <a href="https://theodorusclarence.com">Theodorus Clarence</a></p>
+현대적인 웹 개발을 위한 Next.js 기반 TypeScript 스타터 프로젝트입니다.
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/theodorusclarence/ts-nextjs-tailwind-starter)](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/stargazers)
-[![Depfu](https://badges.depfu.com/badges/fc6e730632ab9dacaf7df478a08684a7/overview.svg)](https://depfu.com/github/theodorusclarence/ts-nextjs-tailwind-starter?project_id=30160)
-[![Last Update](https://img.shields.io/badge/deps%20update-every%20sunday-blue.svg)](https://shields.io/)
+## 🚀 주요 기술 스택
 
-</div>
+- **Next.js 14** - App Router 사용
+- **TypeScript** - 타입 안정성
+- **Tailwind CSS v4** - 유틸리티 퍼스트 CSS 프레임워크
+- **Radix UI** - 접근성이 뛰어난 헤드리스 UI 컴포넌트
+- **React Query (TanStack Query)** - 서버 상태 관리
+- **Zod** - 스키마 검증 및 타입 추론
+- **Storybook** - 컴포넌트 문서화 및 개발
 
-## Features
+## 📁 프로젝트 구조
 
-This repository is 🔋 battery packed with:
+```
+src/
+├── app/                    # Next.js App Router 페이지
+│   ├── layout.tsx         # 루트 레이아웃
+│   ├── page.tsx           # 홈 페이지
+│   ├── error.tsx          # 에러 페이지
+│   ├── not-found.tsx      # 404 페이지
+│   └── [페이지별 폴더]/
+├── _pages/                 # 페이지별 컴포넌트 (높은 응집도)
+│   ├── landing/           # 랜딩 페이지 관련 컴포넌트
+│   ├── salary-compare-form/ # 급여 비교 폼 페이지
+│   ├── salary-result/     # 급여 결과 페이지
+│   └── asset-management-compare-form/ # 자산 관리 비교 폼
+├── components/            # 공유 컴포넌트
+│   ├── common/           # 공통 컴포넌트
+│   ├── icons/            # 아이콘 컴포넌트
+│   ├── layout/           # 레이아웃 컴포넌트
+│   ├── steps/            # 스텝 관련 컴포넌트
+│   └── ga/               # Google Analytics 컴포넌트
+├── lib/                   # 유틸리티 함수
+│   ├── api.ts            # API 관련 유틸
+│   ├── className.ts      # 클래스명 유틸 (cn)
+│   ├── env.ts            # 환경변수 관리
+│   ├── logger.ts         # 로깅 유틸
+│   └── og.ts             # Open Graph 유틸
+├── apis/                  # API 관련 코드
+├── providers/             # React Context Providers
+├── constant/              # 상수 정의
+├── styles/               # 글로벌 스타일
+└── assets/               # 정적 자산
+```
 
-- ⚡️ Next.js 14 with App Router
-- ⚛️ React 18
-- ✨ TypeScript
-- 💨 Tailwind CSS 3 — Configured with CSS Variables to extend the **primary** color
-- 💎 Pre-built Components — Components that will **automatically adapt** with your brand color, [check here for the demo](https://tsnext-tw.thcl.dev/components)
-- 🃏 Jest — Configured for unit testing
-- 📈 Absolute Import and Path Alias — Import components using `@/` prefix
-- 📏 ESLint — Find and fix problems in your code, also will **auto sort** your imports
-- 💖 Prettier — Format your code consistently
-- 🐶 Husky & Lint Staged — Run scripts on your staged files before they are committed
-- 🤖 Conventional Commit Lint — Make sure you & your teammates follow conventional commit
-- ⏰ Release Please — Generate your changelog by activating the `release-please` workflow
-- 👷 Github Actions — Lint your code on PR
-- 🚘 Automatic Branch and Issue Autolink — Branch will be automatically created on issue **assign**, and auto linked on PR
-- 🔥 Snippets — A collection of useful snippets
-- 👀 Open Graph Helper Function — Awesome open graph generated using [og](https://github.com/theodorusclarence/og), fork it and deploy!
-- 🗺 Site Map — Automatically generate sitemap.xml
-- 📦 Expansion Pack — Easily install common libraries, additional components, and configs.
+## 🏗️ 아키텍처 원칙
 
-See the 👉 [feature details and changelog](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/blob/main/CHANGELOG.md) 👈 for more.
+### 컴포넌트 구성 전략
 
-You can also check all of the **details and demos** on my blog post:
+1. **페이지별 응집도 우선**: 각 페이지의 컴포넌트는 `_pages/[페이지명]/` 내부에 수평적으로 구성
+2. **점진적 분리**: 컴포넌트가 공유되는 순간 depth를 활용하여 분리
+3. **전역 공유**: 여러 페이지에서 사용되는 컴포넌트는 루트의 `components/`로 이동
 
-- [One-stop Starter to Maximize Efficiency on Next.js & Tailwind CSS Projects](https://theodorusclarence.com/blog/one-stop-starter)
+### 예시 구조
 
-## Getting Started
+```
+_pages/
+├── salary-compare-form/
+│   ├── SalaryCompareFormPage.tsx  # 메인 페이지 컴포넌트
+│   ├── steps/                     # 해당 페이지 전용 스텝 컴포넌트
+│   ├── providers/                 # 페이지 전용 프로바이더
+│   └── constants/                 # 페이지 전용 상수
+```
 
-### 1. Clone this template using one of the three ways
+## 🛠️ 개발 환경 설정
 
-1. Use this repository as template
+### 필수 요구사항
 
-   **Disclosure:** by using this repository as a template, there will be an attribution on your repository.
+- Node.js 18+
+- pnpm (권장 패키지 매니저)
 
-   I'll appreciate if you do, so this template can be known by others too 😄
-
-   ![Use as template](https://user-images.githubusercontent.com/55318172/129183039-1a61e68d-dd90-4548-9489-7b3ccbb35810.png)
-
-2. Using `create-next-app`
-
-   ```bash
-   pnpm create next-app  -e https://github.com/theodorusclarence/ts-nextjs-tailwind-starter ts-pnpm
-   ```
-
-   If you still want to use **pages directory** (_is not actively maintained_) you can use this command
-
-   ```bash
-   npx create-next-app -e https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/tree/pages-directory project-name
-   ```
-
-3. Using `degit`
-
-   ```bash
-   npx degit theodorusclarence/ts-nextjs-tailwind-starter YOUR_APP_NAME
-   ```
-
-4. Deploy to Vercel
-
-   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fts-nextjs-tailwind-starter)
-
-### 2. Install dependencies
-
-It is encouraged to use **pnpm** so the husky hooks can work properly.
+### 설치 및 실행
 
 ```bash
+# 의존성 설치
 pnpm install
+
+# 개발 서버 실행
+pnpm dev
+
+# 빌드
+pnpm build
+
+# 프로덕션 서버 실행
+pnpm start
 ```
 
-### 3. Run the development server
-
-You can start the server using this command:
+### 개발 도구
 
 ```bash
-pnpm dev
+# 린트 검사
+pnpm lint
+
+# 린트 자동 수정
+pnpm lint:fix
+
+# 타입 검사
+pnpm typecheck
+
+# 테스트 실행
+pnpm test
+
+# 테스트 감시 모드
+pnpm test:watch
+
+# Storybook 실행
+pnpm storybook
+
+# 코드 포맷팅
+pnpm format
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. You can start editing the page by modifying `src/pages/index.tsx`.
+## 🎨 스타일링 가이드
 
-### 4. Change defaults
+### Tailwind CSS v4
 
-There are some things you need to change including title, urls, favicons, etc.
+- 모든 스타일링은 Tailwind CSS 기반
+- `src/styles/globals.css`에 정의된 디자인 토큰 사용
+- 하드코딩된 스타일 값 지양
 
-Find all comments with !STARTERCONF, then follow the guide.
+### 컴포넌트 스타일링 원칙
 
-Don't forget to change the package name in package.json
+- Flex 또는 Grid 레이아웃 사용
+- Margin 대신 Gap 활용
+- 일관된 디자인 시스템 유지
 
-### 5. Commit Message Convention
+## 📦 주요 라이브러리
 
-This starter is using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), it is mandatory to use it to commit changes.
+### UI 컴포넌트
 
-## Projects using ts-nextjs-tailwind-starter
+- **Radix UI**: 접근성이 뛰어난 헤드리스 컴포넌트
+- **Lucide React**: 아이콘 라이브러리
+- **Framer Motion**: 애니메이션 (설정됨)
 
-<!--
-TEMPLATE
-- [sitename](https://sitelink.com) ([Source](https://github.com/githublink))
-- [sitename](https://sitelink.com)
--->
+### 상태 관리 및 데이터
 
-- [theodorusclarence.com](https://theodorusclarence.com) ([Source](https://github.com/theodorusclarence/theodorusclarence.com))
-- [Notiolink](https://notiolink.thcl.dev/) ([Source](https://github.com/theodorusclarence/notiolink))
-- [NextJs + Materia UI + Typescript](https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter)
+- **TanStack Query**: 서버 상태 관리
+- **Zod**: 런타임 타입 검증
 
-Are you using this starter? Please add your page (and repo) to the end of the list via a [Pull Request](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/edit/main/README.md). 😃
+### 개발 도구
 
-## Expansion Pack 📦
+- **ESLint**: 코드 품질 관리
+- **Prettier**: 코드 포맷팅
+- **Husky**: Git 훅 관리
+- **Commitlint**: 커밋 메시지 규칙
 
-This starter is now equipped with an [expansion pack](https://github.com/theodorusclarence/expansion-pack).
+## 🔧 설정 파일
 
-You can easily add expansion such as React Hook Form + Components, Storybook, and more just using a single command line.
+### TypeScript 설정
 
-<https://user-images.githubusercontent.com/55318172/146631994-e1cac137-1664-4cfe-950b-a96decc1eaa6.mp4>
+- 절대 경로 임포트: `@/*` (src 폴더), `~/*` (public 폴더)
+- Strict 모드 활성화
 
-Check out the [expansion pack repository](https://github.com/theodorusclarence/expansion-pack) for the commands
+### 코드 품질
 
-### App Router Update
+- ESLint: 엄격한 규칙 적용
+- Prettier: 일관된 코드 포맷팅
+- Lint-staged: 커밋 전 자동 검사
 
-Due to App Router update, the expansion pack is currently **outdated**. It will be updated in the future. You can still use them by copy and pasting the files.
+## 📚 추가 기능
+
+- **Storybook**: 컴포넌트 문서화 및 개발
+- **Jest**: 단위 테스트
+- **Vitest**: 빠른 테스트 실행
+- **Next Sitemap**: 자동 사이트맵 생성
+- **Google Analytics**: 웹 분석 (설정됨)
+
+## 🚀 배포
+
+프로젝트는 Vercel, Netlify 등 다양한 플랫폼에 배포 가능합니다.
+
+```bash
+# 빌드 후 정적 파일 생성
+pnpm build
+
+# 사이트맵 자동 생성 (빌드 후 실행됨)
+pnpm postbuild
+```
