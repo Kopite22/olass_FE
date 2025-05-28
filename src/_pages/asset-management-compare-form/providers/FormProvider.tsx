@@ -3,6 +3,7 @@ import { createContext, PropsWithChildren, useContext, useState } from 'react';
 interface FormState {
   formData: {
     age: number | null;
+    savingsRate: number;
   };
   setFormData: (data: Partial<FormState['formData']>) => void;
 }
@@ -12,6 +13,7 @@ const FormContext = createContext<FormState | null>(null);
 export const FormProvider = ({ children }: PropsWithChildren) => {
   const [formData, setFormData] = useState<FormState['formData']>({
     age: null,
+    savingsRate: 10,
   });
 
   const updateFormData = (data: Partial<FormState['formData']>) => {
