@@ -1,6 +1,6 @@
-# Next.js TypeScript Tailwind Starter
+# Olass
 
-현대적인 웹 개발을 위한 Next.js 기반 TypeScript 스타터 프로젝트입니다.
+연봉 비교 서비스
 
 ## 🚀 주요 기술 스택
 
