@@ -3,7 +3,6 @@
 import { Button } from '@/components/common/Button';
 import FormBody from '@/components/common/Form/FormBody';
 import { FormContainer } from '@/components/common/Form/FormContainer';
-import FormDescription from '@/components/common/Form/FormDescription';
 import FormFooter from '@/components/common/Form/FormFooter';
 import FormHeader from '@/components/common/Form/FormHeader';
 import FormTitle from '@/components/common/Form/FormTitle';
@@ -23,10 +22,11 @@ export default function SavingsRateStep() {
   return (
     <FormContainer>
       <FormHeader>
-        <FormTitle>월 소득 중 저축 비율을 알려주세요</FormTitle>
-        <FormDescription>
-          정확한 분석을 위해 저축 비율을 입력해주세요
-        </FormDescription>
+        <FormTitle>
+          월급 중 저축하거나 투자하는
+          <br />
+          비율을 알려주세요
+        </FormTitle>
       </FormHeader>
       <FormBody>
         <LabeledSlider
