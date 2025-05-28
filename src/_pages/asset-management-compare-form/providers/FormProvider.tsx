@@ -5,6 +5,7 @@ interface FormState {
     age: number | null;
     savingsRate: number;
     carOwnership: boolean | null;
+    monthlyRent: boolean | null;
   };
   setFormData: (data: Partial<FormState['formData']>) => void;
 }
@@ -16,6 +17,7 @@ export const FormProvider = ({ children }: PropsWithChildren) => {
     age: null,
     savingsRate: 10,
     carOwnership: null,
+    monthlyRent: null,
   });
 
   const updateFormData = (data: Partial<FormState['formData']>) => {

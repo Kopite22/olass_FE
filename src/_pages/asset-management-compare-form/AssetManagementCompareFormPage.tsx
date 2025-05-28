@@ -12,6 +12,7 @@ import { FormSteps } from '@/_pages/asset-management-compare-form/constants/form
 import { FormProvider } from '@/_pages/asset-management-compare-form/providers/FormProvider';
 import AgeStep from '@/_pages/asset-management-compare-form/steps/AgeStep';
 import CarOwnershipStep from '@/_pages/asset-management-compare-form/steps/CarOwnershipStep';
+import MonthlyRentStep from '@/_pages/asset-management-compare-form/steps/MonthlyRentStep';
 import SavingsRateStep from '@/_pages/asset-management-compare-form/steps/SavingsRateStep';
 
 const AssetManagementCompareFormPage = () => {
@@ -34,6 +35,9 @@ const AssetManagementCompareFormPage = () => {
               </Step>
               <Step name={FormSteps.CarOwnership}>
                 <CarOwnershipStep />
+              </Step>
+              <Step name={FormSteps.MonthlyRent}>
+                <MonthlyRentStep />
               </Step>
             </FormCard>
           </Steps>

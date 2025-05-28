@@ -23,7 +23,13 @@ export const OptionCard = ({
       }`}
     >
       <div className='w-full h-full relative'>
-        <Image src={imageSrc} alt={title} fill className='object-contain' />
+        <Image
+          priority
+          src={imageSrc}
+          alt={title}
+          fill
+          className='object-contain'
+        />
       </div>
       <span className='text-body-1 font-bold leading-[26px] tracking-[-0.02%] text-neutral-900'>
         {title}
