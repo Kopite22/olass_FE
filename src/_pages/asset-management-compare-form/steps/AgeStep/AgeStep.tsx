@@ -9,12 +9,14 @@ import FormDescription from '@/components/common/Form/FormDescription';
 import FormHeader from '@/components/common/Form/FormHeader';
 import FormTitle from '@/components/common/Form/FormTitle';
 import { type ValidationError } from '@/components/common/LocaleNumberInput';
+import { useStep } from '@/components/steps';
 
 import { useForm } from '@/_pages/asset-management-compare-form/providers/FormProvider';
 import AgeInput from '@/_pages/asset-management-compare-form/steps/AgeStep/AgeInput';
 
 export default function AgeStep() {
   const { formData, setFormData } = useForm();
+  const { next } = useStep();
   const [isValid, setIsValid] = useState(false);
 
   const handleAgeChange = (value: number) => {
@@ -29,6 +31,7 @@ export default function AgeStep() {
     if (!formData.age) {
       return;
     }
+    next();
   };
 
   return (

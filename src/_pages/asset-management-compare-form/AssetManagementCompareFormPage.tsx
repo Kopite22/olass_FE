@@ -11,6 +11,7 @@ import BackStepButton from '@/components/steps/BackStepButton';
 import { FormSteps } from '@/_pages/asset-management-compare-form/constants/formSteps';
 import { FormProvider } from '@/_pages/asset-management-compare-form/providers/FormProvider';
 import AgeStep from '@/_pages/asset-management-compare-form/steps/AgeStep';
+import SavingsRateStep from '@/_pages/asset-management-compare-form/steps/SavingsRateStep';
 
 const AssetManagementCompareFormPage = () => {
   return (
@@ -26,6 +27,9 @@ const AssetManagementCompareFormPage = () => {
               </div>
               <Step name={FormSteps.Age}>
                 <AgeStep />
+              </Step>
+              <Step name={FormSteps.SavingsRate}>
+                <SavingsRateStep />
               </Step>
             </FormCard>
           </Steps>
