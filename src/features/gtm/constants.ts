@@ -11,4 +11,4 @@ export const GTM_EVENTS = {
   PAGE_VIEW: 'page_view',
 } as const;
 
-export type GTMEventType = (typeof GTM_EVENTS)[keyof typeof GTM_EVENTS]; 
+export type GTMEventType = (typeof GTM_EVENTS)[keyof typeof GTM_EVENTS];

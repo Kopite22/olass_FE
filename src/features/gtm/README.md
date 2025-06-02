@@ -118,7 +118,11 @@ export type GTMEventType = (typeof GTM_EVENTS)[keyof typeof GTM_EVENTS];
 export class GTMManager {
   push(event: GTMEvent): void;
   trackFormStart(formName: string): void;
-  trackFormStepComplete(formName: string, stepName: string, stepNumber: number): void;
+  trackFormStepComplete(
+    formName: string,
+    stepName: string,
+    stepNumber: number
+  ): void;
   // ... 기타 메서드들
   getDataLayerState(): Object[];
 }
@@ -156,20 +160,24 @@ export default function SalaryForm() {
   }, []);
 
   const handleStepComplete = (stepName: string) => {
-    gtmManager.trackFormStepComplete('salary_comparison', stepName, currentStep + 1);
-    setCurrentStep(prev => prev + 1);
+    gtmManager.trackFormStepComplete(
+      'salary_comparison',
+      stepName,
+      currentStep + 1
+    );
+    setCurrentStep((prev) => prev + 1);
   };
 
-  const handleSalarySubmit = (age: string, jobCategory: string, salary: string) => {
+  const handleSalarySubmit = (
+    age: string,
+    jobCategory: string,
+    salary: string
+  ) => {
     gtmManager.trackSalaryEntered(age, jobCategory, salary);
     handleStepComplete('salary_input');
   };
 
-  return (
-    <form>
-      {/* 폼 컴포넌트 구현 */}
-    </form>
-  );
+  return <form>{/* 폼 컴포넌트 구현 */}</form>;
 }
 ```
 
@@ -179,7 +187,10 @@ export default function SalaryForm() {
 import { gtmManager, type GTMEvent } from '@/features/gtm';
 
 // 타입 안전한 이벤트 생성
-const createCustomEvent = (eventName: string, data: Record<string, any>): GTMEvent => {
+const createCustomEvent = (
+  eventName: string,
+  data: Record<string, any>
+): GTMEvent => {
   return {
     event: eventName,
     ...data,

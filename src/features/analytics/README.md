@@ -46,21 +46,17 @@ function MyComponent() {
     trackFormStart('salary_comparison');
   };
 
-  return (
-    <button onClick={handleStartForm}>
-      폼 시작하기
-    </button>
-  );
+  return <button onClick={handleStartForm}>폼 시작하기</button>;
 }
 ```
 
 ### 3. 개별 함수 임포트
 
 ```tsx
-import { 
-  trackFormStart, 
+import {
+  trackFormStart,
   trackSalaryEntered,
-  trackEmailSubmit 
+  trackEmailSubmit,
 } from '@/features/analytics';
 
 // 직접 함수 호출
@@ -111,14 +107,14 @@ import { analytics } from '@/features/analytics';
 analytics.updateConfig({
   enableGTM: true,
   enableGA4: false,
-  debug: true
+  debug: true,
 });
 
 // GA4만 사용
 analytics.updateConfig({
   enableGTM: false,
   enableGA4: true,
-  debug: false
+  debug: false,
 });
 ```
 
@@ -174,7 +170,11 @@ export interface DebugInfo {
 ```tsx
 export class AnalyticsManager {
   trackFormStart(formName: string): void;
-  trackFormStepComplete(formName: string, stepName: string, stepNumber: number): void;
+  trackFormStepComplete(
+    formName: string,
+    stepName: string,
+    stepNumber: number
+  ): void;
   // ... 기타 메서드들
 }
 
@@ -234,12 +234,12 @@ export default function SalaryComparisonForm() {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
   const [startTime, setStartTime] = useState<number>();
-  
-  const { 
-    trackFormStart, 
-    trackFormStepComplete, 
+
+  const {
+    trackFormStart,
+    trackFormStepComplete,
     trackFormSubmit,
-    trackSalaryEntered 
+    trackSalaryEntered,
   } = useAnalytics();
 
   // 폼 시작 시
@@ -251,11 +251,15 @@ export default function SalaryComparisonForm() {
   // 단계 완료 시
   const handleStepComplete = (stepName: string) => {
     trackFormStepComplete('salary_comparison', stepName, currentStep + 1);
-    setCurrentStep(prev => prev + 1);
+    setCurrentStep((prev) => prev + 1);
   };
 
   // 급여 입력 시
-  const handleSalarySubmit = (age: string, jobCategory: string, salary: string) => {
+  const handleSalarySubmit = (
+    age: string,
+    jobCategory: string,
+    salary: string
+  ) => {
     trackSalaryEntered(age, jobCategory, salary);
     handleStepComplete('salary_input');
   };
@@ -266,11 +270,7 @@ export default function SalaryComparisonForm() {
     trackFormSubmit('salary_comparison', 3, completionTime);
   };
 
-  return (
-    <form>
-      {/* 폼 컴포넌트 구현 */}
-    </form>
-  );
+  return <form>{/* 폼 컴포넌트 구현 */}</form>;
 }
 ```
 
@@ -286,10 +286,10 @@ interface FOMOQuestionProps {
   onAnswer: (answer: string) => void;
 }
 
-export default function FOMOQuestion({ 
-  questionType, 
-  userPercentile, 
-  onAnswer 
+export default function FOMOQuestion({
+  questionType,
+  userPercentile,
+  onAnswer,
 }: FOMOQuestionProps) {
   const { trackFOMOQuestionShown, trackFOMOQuestionAnswered } = useAnalytics();
 
@@ -299,7 +299,12 @@ export default function FOMOQuestion({
 
   const handleAnswer = (answer: string) => {
     const isBelowAverage = userPercentile < 50;
-    trackFOMOQuestionAnswered(questionType, answer, isBelowAverage, userPercentile);
+    trackFOMOQuestionAnswered(
+      questionType,
+      answer,
+      isBelowAverage,
+      userPercentile
+    );
     onAnswer(answer);
   };
 
@@ -309,9 +314,7 @@ export default function FOMOQuestion({
       <button onClick={() => handleAnswer('increase_savings')}>
         저축을 늘리고 싶어요
       </button>
-      <button onClick={() => handleAnswer('satisfied')}>
-        현재 만족해요
-      </button>
+      <button onClick={() => handleAnswer('satisfied')}>현재 만족해요</button>
     </div>
   );
 }
@@ -322,10 +325,12 @@ export default function FOMOQuestion({
 ### 필요한 GTM 트리거
 
 1. **Form Start Trigger**
+
    - 트리거 유형: 커스텀 이벤트
    - 이벤트 이름: `form_start`
 
 2. **Form Step Complete Trigger**
+
    - 트리거 유형: 커스텀 이벤트
    - 이벤트 이름: `form_step_complete`
 

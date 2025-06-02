@@ -31,4 +31,4 @@ export {
 } from './utils';
 
 // === 상수 exports ===
-export { type GA4EventType,GA4_EVENTS } from './constants';
+export { type GA4EventType, GA4_EVENTS } from './constants';

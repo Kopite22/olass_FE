@@ -34,10 +34,10 @@ ga4Manager.trackSalaryEntered('25-30', 'developer', '5000-7000');
 ### 2. 편의 함수 사용
 
 ```tsx
-import { 
-  trackFormStart, 
+import {
+  trackFormStart,
   trackSalaryEntered,
-  setUserProperties 
+  setUserProperties,
 } from '@/features/ga';
 
 // 편의 함수로 이벤트 전송
@@ -47,7 +47,7 @@ trackSalaryEntered('25-30', 'developer', '5000-7000');
 // 사용자 속성 설정
 setUserProperties({
   user_age_group: '25-30',
-  user_job_category: 'developer'
+  user_job_category: 'developer',
 });
 ```
 
@@ -126,7 +126,11 @@ export type GA4EventType = (typeof GA4_EVENTS)[keyof typeof GA4_EVENTS];
 ```tsx
 export class GA4Manager {
   trackFormStart(formName: string): void;
-  trackFormStepComplete(formName: string, stepName: string, stepNumber: number): void;
+  trackFormStepComplete(
+    formName: string,
+    stepName: string,
+    stepNumber: number
+  ): void;
   // ... 기타 메서드들
   setUserProperties(properties: Record<string, string | number>): void;
 }
@@ -177,8 +181,12 @@ export default function SalaryForm() {
   }, []);
 
   const handleStepComplete = (stepName: string) => {
-    ga4Manager.trackFormStepComplete('salary_comparison', stepName, currentStep + 1);
-    setCurrentStep(prev => prev + 1);
+    ga4Manager.trackFormStepComplete(
+      'salary_comparison',
+      stepName,
+      currentStep + 1
+    );
+    setCurrentStep((prev) => prev + 1);
   };
 
   const handleFormComplete = () => {
@@ -186,11 +194,7 @@ export default function SalaryForm() {
     ga4Manager.trackFormSubmit('salary_comparison', 3, completionTime);
   };
 
-  return (
-    <form>
-      {/* 폼 컴포넌트 구현 */}
-    </form>
-  );
+  return <form>{/* 폼 컴포넌트 구현 */}</form>;
 }
 ```
 
@@ -205,7 +209,7 @@ const handleUserDataComplete = (userData: UserData) => {
     user_age_group: userData.age,
     user_job_category: userData.jobCategory,
     user_salary_range: userData.salaryRange,
-    user_signup_date: new Date().toISOString().split('T')[0]
+    user_signup_date: new Date().toISOString().split('T')[0],
   });
 };
 ```
@@ -216,12 +220,15 @@ const handleUserDataComplete = (userData: UserData) => {
 import { trackCustomEvent, type BaseGA4EventParams } from '@/features/ga';
 
 // 특별한 사용자 행동 추적
-const trackSpecialAction = (actionType: string, details: Record<string, any>) => {
+const trackSpecialAction = (
+  actionType: string,
+  details: Record<string, any>
+) => {
   const eventParams: BaseGA4EventParams = {
     action_type: actionType,
     ...details,
   };
-  
+
   trackCustomEvent('special_user_action', eventParams);
 };
 
@@ -229,7 +236,7 @@ const trackSpecialAction = (actionType: string, details: Record<string, any>) =>
 trackSpecialAction('advanced_calculation_used', {
   calculation_type: 'retirement_planning',
   input_values_count: 5,
-  result_accuracy: 'high'
+  result_accuracy: 'high',
 });
 ```
 
@@ -288,9 +295,9 @@ trackCustomEvent('purchase', {
       item_name: 'Premium Analysis',
       category: 'Service',
       quantity: 1,
-      price: 25.42
-    }
-  ]
+      price: 25.42,
+    },
+  ],
 });
 ```
 
@@ -328,8 +335,8 @@ trackNewFeatureUsage(featureName: string, duration: number, successRate: number)
 
 // utils.ts
 export const trackNewFeatureUsage = (
-  featureName: string, 
-  duration: number, 
+  featureName: string,
+  duration: number,
   successRate: number
 ) => ga4Manager.trackNewFeatureUsage(featureName, duration, successRate);
 ```

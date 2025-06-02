@@ -17,4 +17,4 @@ export type {
 export { GTMManager, gtmManager } from './GTMManager';
 
 // === 상수 exports ===
-export { type GTMEventType,GTM_EVENTS } from './constants';
+export { type GTMEventType, GTM_EVENTS } from './constants';

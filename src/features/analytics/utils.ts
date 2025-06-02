@@ -66,4 +66,4 @@ export const setUserProperties = (
 export const trackCustomEvent = (
   eventName: string,
   parameters: Record<string, string | number | boolean>
-) => analytics.trackCustomEvent(eventName, parameters); 
+) => analytics.trackCustomEvent(eventName, parameters);

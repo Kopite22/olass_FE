@@ -2,7 +2,7 @@
 export type { AnalyticsConfig, DebugInfo } from './types';
 
 // === 클래스 및 인스턴스 exports ===
-export { analytics,AnalyticsManager } from './AnalyticsManager';
+export { analytics, AnalyticsManager } from './AnalyticsManager';
 
 // === Hook exports ===
 export { useAnalytics } from './hooks';
@@ -23,5 +23,5 @@ export {
 } from './utils';
 
 // === 상수 exports ===
-export { GA4_EVENTS } from '@/features/ga'; 
+export { GA4_EVENTS } from '@/features/ga';
 export { GTM_EVENTS } from '@/features/gtm';

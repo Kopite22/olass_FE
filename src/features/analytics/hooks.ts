@@ -29,4 +29,4 @@ export const useAnalytics = () => {
     trackCustomEvent,
     getDebugInfo: () => analytics.getDebugInfo(),
   };
-}; 
+};

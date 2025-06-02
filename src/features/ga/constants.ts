@@ -11,4 +11,4 @@ export const GA4_EVENTS = {
   CUSTOM_PAGE_VIEW: 'custom_page_view',
 } as const;
 
-export type GA4EventType = (typeof GA4_EVENTS)[keyof typeof GA4_EVENTS]; 
+export type GA4EventType = (typeof GA4_EVENTS)[keyof typeof GA4_EVENTS];

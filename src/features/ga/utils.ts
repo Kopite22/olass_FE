@@ -66,4 +66,4 @@ export const trackCustomEvent = (
 
 export const setUserProperties = (
   properties: Record<string, string | number>
-) => ga4Manager.setUserProperties(properties); 
+) => ga4Manager.setUserProperties(properties);

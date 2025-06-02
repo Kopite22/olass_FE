@@ -69,4 +69,4 @@ export interface CustomPageViewParams extends BaseGA4EventParams {
   page_title: string;
   referrer?: string;
   timestamp?: string;
-} 
+}
