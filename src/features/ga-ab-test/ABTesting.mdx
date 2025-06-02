@@ -46,7 +46,7 @@ A/B 테스트 시스템은 다음과 같은 주요 구성 요소로 이루어져
 4. **GoogleAnalytics**: GA와의 통합을 처리하는 컴포넌트
 5. **유틸리티**: 실험 구성 및 분석을 위한 유틸리티 함수들
 
-모든 A/B 테스트 관련 파일들은 `src/components/ga` 디렉토리 내에 응집도 높게 구성되어 있습니다:
+모든 A/B 테스트 관련 파일들은 `src/features/ga-ab-test` 디렉토리 내에 응집도 높게 구성되어 있습니다:
 
 ```
 src/
@@ -61,13 +61,13 @@ src/
 
 ## 파일 구조
 
-이 A/B 테스트 시스템은 좋은 응집도를 위해 모든 관련 파일이 `src/components/ga` 디렉토리에 함께 위치해 있습니다:
+이 A/B 테스트 시스템은 좋은 응집도를 위해 모든 관련 파일이 `src/features/ga-ab-test` 디렉토리에 함께 위치해 있습니다:
 
 ```
 src/
   app/
     layout.tsx         - ABTestProvider와 GoogleAnalytics 컴포넌트 포함
-  components/
+  features/
     ga/                - A/B 테스트 관련 모든 파일을 포함하는 디렉토리
       abtest.ts        - 핵심 A/B 테스트 유틸리티 함수
       ABTestProvider.tsx - 컨텍스트 제공자 및 UI 컴포넌트
@@ -85,8 +85,8 @@ src/
 // middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getExistingExperiments } from './components/ga/abtest';
-import { getExperimentsForPath } from './components/ga/experiments-config';
+import { getExistingExperiments } from './features/ga/abtest';
+import { getExperimentsForPath } from './features/ga/experiments-config';
 
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
@@ -138,10 +138,10 @@ export default function RootLayout({ children }) {
 
 ## 실험 구성하기
 
-실험은 `components/ga/experiments-config.ts` 파일에서 중앙 관리됩니다:
+실험은 `features/ga-ab-test/experiments-config.ts` 파일에서 중앙 관리됩니다:
 
 ```tsx
-// components/ga/experiments-config.ts
+// features/ga/experiments-config.ts
 import { ExperimentConfig } from './abtest';
 
 export enum ExperimentType {
@@ -180,7 +180,7 @@ export const ACTIVE_EXPERIMENTS: ExperimentConfig[] = [
 ### 기본 사용법
 
 ```tsx
-import { ABTestComponent } from '@/components/ga/ABTestProvider';
+import { ABTestComponent } from '@/features/ga-ab-test/ABTestProvider';
 
 function MyPage() {
   return (
@@ -199,8 +199,8 @@ function MyPage() {
 ### 사용자 속성 및 이벤트 추적
 
 ```tsx
-import { useABTest } from '@/components/ga/ABTestProvider';
-import { trackEvent, EventCategory } from '@/components/ga/analytics';
+import { useABTest } from '@/features/ga-ab-test/ABTestProvider';
+import { trackEvent, EventCategory } from '@/features/ga-ab-test/analytics';
 
 function ProductActions({ productId }) {
   const { isInVariant, trackConversion } = useABTest();

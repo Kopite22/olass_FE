@@ -9,11 +9,14 @@ import React, {
   useState,
 } from 'react';
 
-import { Experiments, getClientExperiments } from '@/components/ga/abtest';
+import {
+  Experiments,
+  getClientExperiments,
+} from '@/features/ga-ab-test/abtest';
 import {
   sendExperimentConversion,
   sendExperimentData,
-} from '@/components/ga/analytics';
+} from '@/features/ga-ab-test/analytics';
 
 // A/B 테스트 컨텍스트 인터페이스
 interface ABTestContextType {
