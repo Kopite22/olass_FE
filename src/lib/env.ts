@@ -11,6 +11,7 @@ const envVariables = z.object({
   GA_MEASUREMENT_ID: z.string(),
   SERVER_URL: z.string().url(),
   NEXT_PUBLIC_SERVER_URL: z.string().url(),
+  GOOGLE_TAG_MANAGER_ID: z.string(),
 });
 
 envVariables.parse(process.env);

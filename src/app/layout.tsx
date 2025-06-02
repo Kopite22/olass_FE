@@ -1,3 +1,4 @@
+import { GoogleTagManager } from '@next/third-parties/google';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Metadata } from 'next';
 import * as React from 'react';
@@ -7,7 +8,7 @@ import '@/styles/globals.css';
 import GoogleAnalytics from '@/components/ga/GoogleAnalytics';
 
 import { siteConfig } from '@/constant/config';
-import { GA_MEASUREMENT_ID } from '@/constant/env';
+import { GA_MEASUREMENT_ID, GOOGLE_TAG_MANGER_ID } from '@/constant/env';
 import QueryClientProvider from '@/providers/QueryClientProvider';
 
 export const metadata: Metadata = {
@@ -62,6 +63,7 @@ export default function RootLayout({
         </QueryClientProvider>
       </body>
       <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />
+      <GoogleTagManager gtmId={GOOGLE_TAG_MANGER_ID} />
     </html>
   );
 }
