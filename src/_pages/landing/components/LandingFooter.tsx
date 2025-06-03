@@ -5,7 +5,19 @@ import { cn } from '@/lib/className';
 import { buttonVariants } from '@/components/common/Button/Button';
 import ArrowRightThickIcon from '@/components/icons/ArrowRightThickIcon';
 
+import { analytics } from '@/features/analytics';
+
 export default function LandingFooter() {
+  // CTA 클릭 추적 핸들러
+  const handleCTAClick = () => {
+    analytics.trackContentCTAClick(
+      'primary_cta',
+      'button',
+      'landing_footer',
+      '/salary-compare-form'
+    );
+  };
+
   return (
     <div className='flex flex-col items-center gap-3 w-full mb-[51px]'>
       <p className='text-label-1 font-medium text-neutral-500 text-center'>
@@ -23,6 +35,7 @@ export default function LandingFooter() {
             })
           )}
           href='/salary-compare-form'
+          onClick={handleCTAClick}
         >
           <div className='flex items-center justify-center gap-1.5'>
             1분 안에 내 연봉 위치 보기

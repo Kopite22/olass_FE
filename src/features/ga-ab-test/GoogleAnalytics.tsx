@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import {
   ACTIVE_EXPERIMENTS,
   getClientExperiments,
-} from '@/components/ga/abtest';
+} from '@/features/ga-ab-test/abtest';
 
 interface GoogleAnalyticsProps {
   measurementId: string;
