@@ -2,8 +2,8 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { getExistingExperiments } from '@/components/ga/abtest';
-import { getExperimentsForPath } from '@/components/ga/experiments-config';
+import { getExistingExperiments } from '@/features/ga-ab-test/abtest';
+import { getExperimentsForPath } from '@/features/ga-ab-test/experiments-config';
 
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
