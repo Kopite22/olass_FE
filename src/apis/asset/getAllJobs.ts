@@ -1,7 +1,7 @@
 import assetApiInstance from '@/apis/asset/assetApiInstance';
 
 interface RawJob {
-  job_id: string;
+  id: string;
   name: string;
 }
 
@@ -13,7 +13,7 @@ interface Job {
 const inPort = (rawJob: RawJob[]): Job[] => {
   return rawJob.map((job) => {
     return {
-      jobId: job.job_id,
+      jobId: job.id,
       name: job.name,
     };
   });
