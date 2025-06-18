@@ -7,6 +7,15 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
 
+  async rewrites() {
+    return [
+      {
+        source: '/api/asset/v1/:path*',
+        destination: `${process.env.SERVER_URL}/api/asset/v1/:path*`,
+      },
+    ];
+  },
+
   // Uncoment to add domain whitelist
   // images: {
   //   remotePatterns: [
