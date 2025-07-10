@@ -7,7 +7,7 @@ const BackStepButton = () => {
   return currentIndex === 0 ? null : (
     <button onClick={prev} className='flex flex-row items-center gap-0.5'>
       <ArrowLeftIcon />
-      <span className='text-label-1 text-neutral-300'>이전테스트</span>
+      <span className='text-label-1 text-neutral-300'>이전</span>
     </button>
   );
 };
