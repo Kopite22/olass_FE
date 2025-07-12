@@ -1,9 +1,16 @@
 import assetApiInstance from '@/apis/asset/assetApiInstance';
 
+interface Response {
+  code: number;
+  data: RawSalaryCompareResult;
+  message: string;
+  success: boolean;
+}
+
 interface RawSalaryCompareResult {
-  job_salary: number;
-  user_experience: number;
-  user_salary: number;
+  jobSalary: number;
+  userExperience: number;
+  userSalary: number;
 }
 
 interface SalaryCompareResult {
@@ -15,14 +22,10 @@ interface SalaryCompareResult {
 }
 
 const inPort = (rawJob: RawSalaryCompareResult): SalaryCompareResult => {
-  const { job_salary, user_experience, user_salary } = rawJob;
-
-  const year = user_experience;
-  const avgAmount = job_salary; // 천만원 단위 평균 연봉
-  const userSalary = user_salary; // 천만원 단위 유저 연봉
+  const { jobSalary, userExperience, userSalary } = rawJob;
 
   // 유저 연봉이 평균 대비 몇 퍼센트인지 계산
-  const userSalaryRatio = (userSalary / job_salary) * 100;
+  const userSalaryRatio = (userSalary / jobSalary) * 100;
 
   // 유저가 평균보다 얼마나 더 받는지 (평균 초과분의 퍼센트)
   const higherAmount = Math.floor(
@@ -35,11 +38,11 @@ const inPort = (rawJob: RawSalaryCompareResult): SalaryCompareResult => {
   );
 
   return {
-    year,
+    year: userExperience,
     salary: userSalary,
     higherAmount,
     lowerAmount,
-    avgAmount,
+    avgAmount: jobSalary,
   };
 };
 
@@ -51,14 +54,11 @@ interface GetSalaryCompareResultBody {
 }
 
 const getSalaryCompareResult = async (body: GetSalaryCompareResultBody) => {
-  const response = await assetApiInstance.post<RawSalaryCompareResult>(
-    'salary',
-    {
-      json: body,
-    }
-  );
+  const response = await assetApiInstance.post<Response>('salary', {
+    json: body,
+  });
 
-  const rawSalaryCompareResult = await response.json();
+  const rawSalaryCompareResult = (await response.json()).data;
 
   return inPort(rawSalaryCompareResult);
 };
