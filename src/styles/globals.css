@@ -34,6 +34,12 @@ layer(base);
 
   --color-alert: #f84a4a;
 
+  /* Custom gradient colors */
+  --color-gradient-1: #fff1e4;
+  --color-gradient-2: #fff7e6;
+  --color-gradient-3: #ffefef;
+  --color-gradient-4: #fff;
+
   --font-*: initial;
   --font-sans: Pretendard, ui-sans-serif, system-ui, Apple SD Gothic Neo,
     AppleGothic, sans-serif;
@@ -95,6 +101,16 @@ layer(base);
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
+  }
+
+  .bg-gradient-bus {
+    background: linear-gradient(
+      180deg,
+      #fff1e4 10.48%,
+      #fff7e6 18.35%,
+      #ffefef 27.42%,
+      #ffffff 41.94%
+    );
   }
 
   .gradient-background {
