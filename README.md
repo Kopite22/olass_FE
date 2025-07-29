@@ -74,7 +74,6 @@ _pages/
 - pnpm (권장 패키지 매니저)
 
 ### 설치 및 실행
-
 ```bash
 # 의존성 설치
 pnpm install
