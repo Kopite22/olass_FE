@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { cn } from '@/lib/className';
 
@@ -25,6 +26,16 @@ export default function MonthlyRentStep() {
     setSelectedOption(hasMonthlyRent);
     setFormData({ monthlyRent: hasMonthlyRent });
   };
+
+  const uniqueId = uuidv4();
+
+  const searchParams = new URLSearchParams({
+    unique_id: uniqueId,
+    age: formData.age?.toString() ?? '',
+    hasCar: formData.carOwnership?.toString() ?? '',
+    isMonthlyRent: formData.monthlyRent?.toString() ?? '',
+    saveRate: formData.savingsRate?.toString() ?? '',
+  });
 
   return (
     <FormContainer>
@@ -58,7 +69,7 @@ export default function MonthlyRentStep() {
               isFullWidth: true,
             })
           )}
-          href='/asset-analysis'
+          href={`/asset-analysis?${searchParams.toString()}`}
         >
           <div className='flex items-center justify-center gap-1.5'>
             계속하기
