@@ -1,9 +1,9 @@
+import Image from 'next/image';
 import { useMemo } from 'react';
 
 import ThirdTitle from '@/_pages/asset-analysis/components/IfKeep/ThirdTitle';
 import { analysisByResults } from '@/_pages/asset-analysis/constants/analysisByResults';
 import { ResponseCarList } from '@/apis/asset';
-import Image from 'next/image';
 
 interface Props {
   car: ResponseCarList;
