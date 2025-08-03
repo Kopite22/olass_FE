@@ -33,6 +33,14 @@ layer(base);
   --color-neutral-900: #141415;
 
   --color-alert: #f84a4a;
+  --color-coral: #f86a6a;
+  --color-success: #4daf02;
+
+  /* Custom gradient colors */
+  --color-gradient-1: #fff1e4;
+  --color-gradient-2: #fff7e6;
+  --color-gradient-3: #ffefef;
+  --color-gradient-4: #fff;
 
   --font-*: initial;
   --font-sans: Pretendard, ui-sans-serif, system-ui, Apple SD Gothic Neo,
@@ -97,6 +105,34 @@ layer(base);
     border-color: var(--color-gray-200, currentcolor);
   }
 
+  .bg-gradient-lower {
+    background: linear-gradient(
+      180deg,
+      #fff1e4 10.48%,
+      #fff7e6 18.35%,
+      #ffefef 27.42%,
+      #ffffff 41.94%
+    );
+  }
+
+  .bg-gradient-mid {
+    background: linear-gradient(
+      180deg,
+      #fdffea 10.48%,
+      #fff7e6 18.35%,
+      #fdffea 27.42%,
+      #ffffff 41.94%
+    );
+  }
+  .bg-gradient-upper {
+    background: linear-gradient(
+      180deg,
+      #e4f6ff 10.48%,
+      #fffde6 18.35%,
+      #e4f6ff 27.42%,
+      #ffffff 41.94%
+    );
+  }
   .gradient-background {
     background: radial-gradient(
       150.7% 100.67% at 0% 0%,

@@ -1,76 +1,116 @@
+'use client';
+
+import { useSuspenseQuery } from '@tanstack/react-query';
+import Image from 'next/image';
+
 import { GNB } from '@/components/common/GNB';
 import ShareNetworkIcon from '@/components/icons/ShareNetworkIcon';
 import { Screen } from '@/components/layout/Screen';
 
-const AssetAnalysisPage = () => {
+import GradeBar from '@/_pages/asset-analysis/components/GradeBar';
+import IfKeep from '@/_pages/asset-analysis/components/IfKeep';
+import {
+  SummaryLower,
+  SummaryMid,
+  SummaryUpper,
+} from '@/_pages/asset-analysis/components/Summary';
+import { analysisByResults } from '@/_pages/asset-analysis/constants/analysisByResults';
+import { assetQueryKeys } from '@/apis/asset';
+import {
+  ConsumptionGradeParams,
+  ResponseCarList,
+} from '@/apis/asset/postConsumptionGrade';
+
+const carImage: { [key in ResponseCarList]: string } = {
+  publicTransportation: '/images/bus.png',
+  avante: '/images/avante.png',
+  grandeur: '/images/grandeur.png',
+  benz: '/images/benz.png',
+  porsche: '/images/porsche.png',
+};
+
+const carSummary: { [key in ResponseCarList]: React.ReactNode } = {
+  publicTransportation: <SummaryLower car='publicTransportation' />,
+  avante: <SummaryLower car='avante' />,
+  grandeur: <SummaryMid />,
+  benz: <SummaryUpper car='benz' />,
+  porsche: <SummaryUpper car='porsche' />,
+};
+
+const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
+  const { data } = useSuspenseQuery(assetQueryKeys.postConsumptionGrade(props));
+
   return (
-    <Screen className='flex flex-col gap-2 bg-neutral-0 overflow-auto'>
-      <GNB trailing={<ShareNetworkIcon />} />
+    <Screen className='flex flex-col gap-2 overflow-auto'>
       <div
-        className='flex flex-1 flex-col px-5'
-        style={{ border: '1px solid black', flex: 1 }}
+        className={`flex flex-1 flex-col bg-gradient-${
+          analysisByResults[data.car].rank
+        } pb-9`}
       >
+        <GNB trailing={<ShareNetworkIcon />} />
         <div className='flex flex-col mx-auto text-center gap-5'>
           <div className='flex flex-col'>
             <span className='text-[15px]'>내 자산 관리 습관 등급은</span>
-            <span className='text-[32px] font-bold'>대중교통</span>
+            <span className='text-[32px] font-bold'>
+              {analysisByResults[data.car].grade}
+            </span>
           </div>
-          <div className='rounded-full px-2.5 py-1 bg-alert'>
+          <div
+            className={`rounded-full px-2.5 py-1 bg-${
+              analysisByResults[data.car].rankColor
+            } w-fit`}
+          >
             <span className='text-[16px] font-semibold text-neutral-0'>
-              또래 대비 하위 20%
+              또래 대비{' '}
+              {analysisByResults[data.car].rank === 'lower' ? '하위' : '상위'}{' '}
+              {data.percentage}%
             </span>
           </div>
         </div>
 
-        {/* image */}
-        <div
-          className='w-[325px] h-[327px] mx-auto'
-          style={{ border: '1px solid red', borderRadius: '10px' }}
-        ></div>
+        {/* car image */}
+        <Image
+          className='mx-auto'
+          src={carImage[data.car]}
+          alt='publicTransportation'
+          width={325}
+          height={327}
+        />
 
         {/* 등급 */}
-        <div className='px-5 py-3 border-1 border-alert rounded-full'></div>
-
-        {/* 평가 요약 */}
-        <div className='flex flex-col py-5 px-10 rounded-3xl text-center mt-4 border-1 border-neutral-50'>
-          <div className='mx-auto text-[20px] font-bold'>
-            지금처럼 돈을 쓰면
-          </div>
-          <span className='text-[20px] font-bold'>
-            5년 뒤에도 <span className='text-alert'>자차 없는 뚜벅이</span>
-            예요
-          </span>
+        <div className='px-5 w-full'>
+          <GradeBar car={data.car} />
         </div>
 
+        {/* 평가 요약 */}
+        <div className='px-5'>{carSummary[data.car]}</div>
+
         {/* if keep */}
-        <div className='mt-12 flex flex-col gap-8 px-1'>
-          <div className='flex flex-col gap-5'>
-            <span className='text-[20px] font-bold'>
-              지금의 소비.저축 패턴을
-              <br />
-              계속 유지한다면?
-            </span>
-            <div className='flex flex-col gap-6'>
-              {[1, 2, 3].map((item) => (
-                <div key={item} className='flex gap-4'>
-                  <span className='w-[22px] h-[22px] text-center rounded-sm bg-neutral-50 text-neutral-500'>
-                    {item}
+        <IfKeep car={data.car} />
+
+        {/* now */}
+        <div className='mt-12 flex flex-col gap-5 mx-5'>
+          <span className='text-[20px] font-bold'>
+            {analysisByResults[data.car].nowCanChangeTitle ??
+              '지금부터 바꿔볼 수 있어요'}
+          </span>
+          <div className='flex flex-col gap-6'>
+            {analysisByResults[data.car].nowCanChange.map((item, idx) => (
+              <div key={item.title} className='flex gap-4'>
+                <span className='w-[22px] h-[22px] text-center rounded-sm bg-neutral-50 text-neutral-500'>
+                  {idx + 1}
+                </span>
+                <div className='flex flex-col'>
+                  <span className='text-[18px] font-semibold'>
+                    {item.title}
                   </span>
-                  <div className='flex flex-col'>
-                    <span className='text-[18px] font-semibold'>
-                      월급은 받자마자 다 써버리게 돼요
-                    </span>
-                    <span className='font-[15px] text-neutral-700'>
-                      집 사고 차 바꾸는 친구들 사이에서 나만
-                      <br />
-                      제자리일 수 있어요.
-                    </span>
-                  </div>
+                  <span className='font-[15px] text-neutral-700'>
+                    {item.content}
+                  </span>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-          {/* 이미지 */}
         </div>
       </div>
     </Screen>

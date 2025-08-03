@@ -2,7 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+
+import getUUID from '@/lib/uuid';
 
 import { FloatingActionButton } from '@/components/common/FloatingActionButton';
 import FormBody from '@/components/common/Form/FormBody';
@@ -34,7 +35,7 @@ export default function SalaryStep() {
     }
 
     // UUID 생성
-    const uniqueId = uuidv4();
+    const uniqueId = getUUID();
 
     // URL 파라미터로 폼 데이터 전달
     const searchParams = new URLSearchParams({
