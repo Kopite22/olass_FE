@@ -1,3 +1,5 @@
+import carColor from '@/_pages/asset-analysis/constants/carColor';
+
 interface Props {
   car: 'benz' | 'porsche';
 }
@@ -8,12 +10,13 @@ const SummaryUpper = ({ car }: Props) => {
       {car === 'benz' ? (
         <p className='text-[20px] font-bold m-auto'>
           지금처럼 하면{' '}
-          <span className='text-primary-500'>벤츠도 현실이 됩니다</span>
+          <span className={`text-${carColor.benz}`}>벤츠도 현실이 됩니다</span>
         </p>
       ) : (
         <div className='flex flex-col m-auto'>
           <span className='text-[20px] font-bold'>
-            <span className='text-primary-500'>드림카, 포르쉐</span> 더 이상
+            <span className={`text-${carColor.benz}`}>드림카, 포르쉐</span> 더
+            이상
           </span>
           <span className='text-[20px] font-bold'>남의 일이 아닙니다</span>
         </div>
