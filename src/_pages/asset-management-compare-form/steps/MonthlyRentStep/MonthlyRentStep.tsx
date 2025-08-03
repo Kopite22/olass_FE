@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import { cn } from '@/lib/className';
+import getUUID from '@/lib/uuid';
 
 import { buttonVariants } from '@/components/common/Button/Button';
 import FormBody from '@/components/common/Form/FormBody';
@@ -27,7 +27,7 @@ export default function MonthlyRentStep() {
     setFormData({ monthlyRent: hasMonthlyRent });
   };
 
-  const uniqueId = uuidv4();
+  const uniqueId = getUUID();
 
   const searchParams = new URLSearchParams({
     unique_id: uniqueId,
