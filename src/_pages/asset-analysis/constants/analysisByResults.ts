@@ -1,3 +1,4 @@
+import carColor from '@/_pages/asset-analysis/constants/carColor';
 import { ResponseCarList } from '@/apis/asset';
 
 export const analysisByResults: Record<
@@ -11,10 +12,10 @@ export const analysisByResults: Record<
     nowCanChange: { title: string; content: string }[];
   }
 > = {
-  bus: {
+  publicTransportation: {
     grade: '대중교통',
     rank: 'lower',
-    rankColor: 'alert',
+    rankColor: carColor.publicTransportation,
     ifKeep: [
       {
         title: '월급은 받자마자 다 써버리게 돼요',
@@ -46,7 +47,7 @@ export const analysisByResults: Record<
   avante: {
     grade: '아반떼',
     rank: 'lower',
-    rankColor: 'alert',
+    rankColor: carColor.avante,
     ifKeep: [
       {
         title: '그랜저 타는 동기, 나는 아직 아반떼',
@@ -77,7 +78,7 @@ export const analysisByResults: Record<
   grandeur: {
     grade: '그랜저',
     rank: 'mid',
-    rankColor: 'success',
+    rankColor: carColor.grandeur,
     ifKeep: [
       {
         title: '지금 속도면, 그랜저도 문제 없어요',
@@ -108,7 +109,7 @@ export const analysisByResults: Record<
   benz: {
     grade: '벤츠',
     rank: 'upper',
-    rankColor: 'primary-500',
+    rankColor: carColor.benz,
     ifKeep: [
       {
         title: '지금처럼만 가면, 벤츠도 멀지 않아요',
@@ -140,7 +141,7 @@ export const analysisByResults: Record<
   porsche: {
     grade: '포르쉐',
     rank: 'upper',
-    rankColor: 'primary-500',
+    rankColor: carColor.porsche,
     ifKeep: [
       {
         title: '지금처럼만 해도, 드림카는 멀지 않아요',
