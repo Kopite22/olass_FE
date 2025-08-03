@@ -63,7 +63,7 @@ const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
             <span className='text-[16px] font-semibold text-neutral-0'>
               또래 대비{' '}
               {analysisByResults[data.car].rank === 'lower' ? '하위' : '상위'}{' '}
-              {data.percentage >= 10 ? 10 : data.percentage}%
+              {data.percentage <= 10 ? 10 : data.percentage}%
             </span>
           </div>
         </div>
