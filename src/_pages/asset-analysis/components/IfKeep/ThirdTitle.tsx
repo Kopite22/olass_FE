@@ -29,10 +29,10 @@ const ThirdTitle = ({ car }: Props) => {
     );
   }
   if (car === 'benz') {
-    return '누군가는 지금 당신의 루트를 부러워해요';
+    return <>'누군가는 지금 당신의 루트를 부러워해요';</>;
   }
 
-  return "더 이상 '꿈'으로만 남기지 마세요.";
+  return <>'더 이상 '꿈'으로만 남기지 마세요.'</>;
 };
 
 export default ThirdTitle;
