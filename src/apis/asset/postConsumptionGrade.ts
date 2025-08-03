@@ -7,7 +7,12 @@ interface Response {
   success: boolean;
 }
 
-type ResponseCarList = 'bus' | 'avante' | 'grandeur' | 'benz' | 'porsche';
+type ResponseCarList =
+  | 'publicTransportation'
+  | 'avante'
+  | 'grandeur'
+  | 'benz'
+  | 'porsche';
 
 interface ConsumptionGrade {
   car: ResponseCarList;
