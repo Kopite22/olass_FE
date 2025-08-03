@@ -171,4 +171,4 @@ export const analysisByResults: Record<
       },
     ],
   },
-} as const;
+};
