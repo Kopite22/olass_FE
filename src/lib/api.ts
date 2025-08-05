@@ -1,5 +1,5 @@
 const getServerUrl = () => {
-  return '';
+  return process.env.SERVER_URL;
 };
 
 export { getServerUrl };
