@@ -2,13 +2,16 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import { useState } from 'react';
 
 import { GNB } from '@/components/common/GNB';
 import ShareNetworkIcon from '@/components/icons/ShareNetworkIcon';
 import { Screen } from '@/components/layout/Screen';
 
+import EmailForm from '@/_pages/asset-analysis/components/EmailForm';
 import GradeBar from '@/_pages/asset-analysis/components/GradeBar';
 import IfKeep from '@/_pages/asset-analysis/components/IfKeep';
+import ModalAgree from '@/_pages/asset-analysis/components/ModalAgree';
 import {
   SummaryLower,
   SummaryMid,
@@ -38,12 +41,23 @@ const carSummary: { [key in ResponseCarList]: React.ReactNode } = {
 };
 
 const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
+  const [email, setEmail] = useState('');
+  const [isShowModal, setIsShowModal] = useState(false);
+
+  const handleModal = () => {
+    setIsShowModal((prev) => !prev);
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
   const { data } = useSuspenseQuery(assetQueryKeys.postConsumptionGrade(props));
 
   return (
     <Screen className='flex flex-col gap-2 overflow-auto'>
       <div
-        className={`flex flex-1 flex-col bg-gradient-${
+        className={`relative flex flex-1 flex-col bg-gradient-${
           analysisByResults[data.car].rank
         } pb-9`}
       >
@@ -112,6 +126,19 @@ const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
             ))}
           </div>
         </div>
+        {isShowModal ? (
+          <ModalAgree
+            email={email}
+            uniqueId={props.uniqueId}
+            onClose={handleModal}
+          />
+        ) : (
+          <EmailForm
+            email={email}
+            onChangeEmail={handleEmailChange}
+            onShowModal={handleModal}
+          />
+        )}
       </div>
     </Screen>
   );
