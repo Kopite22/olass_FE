@@ -1,4 +1,4 @@
-import userApiInstance from '@/apis/asset/userApiInstance';
+import userApiInstance from '@/apis/user/userApiInstance';
 
 interface Response {
   code: number;
