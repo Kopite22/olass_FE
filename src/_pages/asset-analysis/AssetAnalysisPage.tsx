@@ -43,6 +43,7 @@ const carSummary: { [key in ResponseCarList]: React.ReactNode } = {
 const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
   const [email, setEmail] = useState('');
   const [isShowModal, setIsShowModal] = useState(false);
+  const { data } = useSuspenseQuery(assetQueryKeys.postConsumptionGrade(props));
 
   const handleModal = () => {
     setIsShowModal((prev) => !prev);
@@ -52,7 +53,13 @@ const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
     setEmail(e.target.value);
   };
 
-  const { data } = useSuspenseQuery(assetQueryKeys.postConsumptionGrade(props));
+  const handleShare = () => {
+    navigator.share({
+      title: '내 연봉 위치 확인하기',
+      text: '나랑 비슷한 사람은 얼마나 벌까?',
+      url: window.location.href,
+    });
+  };
 
   return (
     <Screen className='flex flex-col gap-2 overflow-auto modalParent'>
@@ -61,7 +68,13 @@ const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
           analysisByResults[data.car].rank
         } pb-9`}
       >
-        <GNB trailing={<ShareNetworkIcon />} />
+        <GNB
+          trailing={
+            <div onClick={handleShare}>
+              <ShareNetworkIcon />
+            </div>
+          }
+        />
         <div className='flex flex-col mx-auto text-center gap-5'>
           <div className='flex flex-col'>
             <span className='text-[15px]'>내 자산 관리 습관 등급은</span>
