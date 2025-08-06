@@ -55,9 +55,9 @@ const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
   const { data } = useSuspenseQuery(assetQueryKeys.postConsumptionGrade(props));
 
   return (
-    <Screen className='flex flex-col gap-2 overflow-auto'>
+    <Screen className='flex flex-col gap-2 overflow-auto modalParent'>
       <div
-        className={`relative flex flex-1 flex-col bg-gradient-${
+        className={`flex flex-1 flex-col bg-gradient-${
           analysisByResults[data.car].rank
         } pb-9`}
       >
