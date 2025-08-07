@@ -13,6 +13,10 @@ const nextConfig = {
         source: '/api/asset/v1/:path*',
         destination: `${process.env.SERVER_URL}/api/asset/v1/:path*`,
       },
+      {
+        source: '/api/user/v1/:path*',
+        destination: `${process.env.SERVER_URL}/api/user/v1/:path*`,
+      },
     ];
   },
 
