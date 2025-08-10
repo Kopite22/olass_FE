@@ -1,6 +1,7 @@
 import { GoogleTagManager } from '@next/third-parties/google';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Metadata } from 'next';
+import Head from 'next/head';
 import * as React from 'react';
 
 import '@/styles/globals.css';
@@ -65,6 +66,9 @@ export default function RootLayout({
 }) {
   return (
     <html>
+      <Head>
+        <meta property='og:image' content='images/og.png' />
+      </Head>
       <body className='bg-neutral-25 w-dvw h-dvh flex items-center justify-center'>
         <QueryClientProvider>
           {children}
