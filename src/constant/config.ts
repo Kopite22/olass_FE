@@ -1,7 +1,5 @@
 export const siteConfig = {
-  title: 'Olass',
-  description:
-    'A starter for Next.js, Tailwind CSS, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky',
-  /** Without additional '/' on the end, e.g. https://theodorusclarence.com */
-  url: 'https://tsnext-tw.thcl.dev',
+  title: '내 연봉 위치 확인하기',
+  description: '나랑 비슷한 사람은 얼마나 벌까?',
+  url: 'https://www.olass.co.kr',
 };
