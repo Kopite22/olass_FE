@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { cn } from '@/lib/className';
 import getUUID from '@/lib/uuid';
@@ -15,6 +15,8 @@ import FormTitle from '@/components/common/Form/FormTitle';
 
 import { OptionCard } from '@/_pages/asset-management-compare-form/components';
 import { useForm } from '@/_pages/asset-management-compare-form/providers/FormProvider';
+import { isProd } from '@/constant/env';
+import { analytics } from '@/features/analytics';
 
 export default function MonthlyRentStep() {
   const { formData, setFormData } = useForm();
@@ -36,6 +38,28 @@ export default function MonthlyRentStep() {
     isMonthlyRent: formData.monthlyRent?.toString() ?? '',
     saveRate: formData.savingsRate?.toString() ?? '',
   });
+
+  useEffect(() => {
+    // 페이지 뷰 추적
+    analytics.trackPageView(
+      '/asset-management-compare-form?step=monthlyRent',
+      'asset_test_question_monthly_rent',
+      document.referrer || undefined
+    );
+
+    // 사용자 속성 설정
+    analytics.setUserProperties({
+      landing_visit_time: new Date().toISOString(),
+      user_agent: navigator.userAgent.substring(0, 100), // UA 길이 제한
+      screen_resolution: `${screen.width}x${screen.height}`,
+    });
+
+    // 개발 환경에서 디버그 정보 확인
+    if (!isProd) {
+      // eslint-disable-next-line no-console
+      console.log('🚀 월세 입력 페이지 분석 정보:', analytics.getDebugInfo());
+    }
+  }, []);
 
   return (
     <FormContainer>
