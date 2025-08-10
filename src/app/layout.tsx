@@ -42,7 +42,12 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.title,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/images/og.jpg`],
+    images: [
+      {
+        url: '/images/og.png',
+        alt: 'og Image',
+      },
+    ],
     // creator: '@th_clarence',
   },
   // authors: [
