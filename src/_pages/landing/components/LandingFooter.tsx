@@ -10,12 +10,10 @@ import { analytics } from '@/features/analytics';
 export default function LandingFooter() {
   // CTA 클릭 추적 핸들러
   const handleCTAClick = () => {
-    analytics.trackContentCTAClick(
-      'primary_cta',
-      'button',
-      'landing_footer',
-      '/salary-compare-form'
-    );
+    analytics.trackContentCTAClick({
+      buttonType: 'next',
+      eventUrl: window.location.pathname,
+    });
   };
 
   return (
