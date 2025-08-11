@@ -17,7 +17,7 @@ import { type ValidationError } from '@/components/common/LocaleNumberInput';
 
 import { useForm } from '@/_pages/salary-compare-form/providers/FormProvider';
 import SalaryInput from '@/_pages/salary-compare-form/steps/SalaryStep/SalaryInput';
-import { isProd } from '@/constant/env';
+
 import { analytics } from '@/features/analytics';
 
 export default function SalaryStep() {
@@ -38,6 +38,11 @@ export default function SalaryStep() {
       return;
     }
 
+    analytics.trackContentCTAClick({
+      buttonType: 'submit',
+      eventUrl: window.location.pathname,
+    });
+
     // UUID 생성
     const uniqueId = getUUID();
 
@@ -53,27 +58,6 @@ export default function SalaryStep() {
     router.push(`/salary-result?${searchParams.toString()}`);
   };
 
-  useEffect(() => {
-    // 페이지 뷰 추적
-    analytics.trackPageView(
-      '/salary-compare-form?step=salary',
-      'salary_comparison_salary',
-      document.referrer || undefined
-    );
-
-    // 사용자 속성 설정
-    analytics.setUserProperties({
-      landing_visit_time: new Date().toISOString(),
-      user_agent: navigator.userAgent.substring(0, 100), // UA 길이 제한
-      screen_resolution: `${screen.width}x${screen.height}`,
-    });
-
-    // 개발 환경에서 디버그 정보 확인
-    if (!isProd) {
-      // eslint-disable-next-line no-console
-      console.log('🚀 직업 입력 페이지 분석 정보:', analytics.getDebugInfo());
-    }
-  }, []);
 
   return (
     <FormContainer>

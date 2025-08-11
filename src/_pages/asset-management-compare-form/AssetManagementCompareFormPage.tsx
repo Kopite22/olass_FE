@@ -18,12 +18,10 @@ import { analytics } from '@/features/analytics';
 
 const AssetManagementCompareFormPage = () => {
   const handleShare = () => {
-    analytics.trackContentCTAClick(
-      'primary_cta',
-      'button',
-      'header-share',
-      'https://www.olass.co.kr'
-    );
+    analytics.trackContentCTAClick({
+      buttonType: 'share',
+      eventUrl: window.location.href,
+    });
 
     navigator.share({
       title: '내 연봉 위치 확인하기',

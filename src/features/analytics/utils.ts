@@ -46,12 +46,15 @@ export const trackEmailSubmit = (
   source?: string
 ) => analytics.trackEmailSubmit(contentInterest, userPercentile, source);
 
-export const trackContentCTAClick = (
-  ctaType: string,
-  contentType: string,
-  position: string,
-  targetUrl?: string
-) => analytics.trackContentCTAClick(ctaType, contentType, position, targetUrl);
+export const trackContentCTAClick = ({
+  buttonType,
+  eventType = 'click',
+  eventUrl,
+}: {
+  buttonType: 'next' | 'share' | 'submit';
+  eventType?: string;
+  eventUrl: string;
+}) => analytics.trackContentCTAClick({ buttonType, eventType, eventUrl });
 
 export const trackPageView = (
   pagePath: string,
