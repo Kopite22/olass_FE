@@ -8,6 +8,7 @@ import { Button } from '@/components/common/Button';
 
 import { PostEmailAgreeParams } from '@/apis/user';
 import postEmailAgree from '@/apis/user/postEmailAgree';
+import { analytics } from '@/features/analytics';
 
 interface Props {
   email: string;
@@ -32,6 +33,10 @@ const ModalAgree = ({ email, uniqueId, onClose }: Props) => {
   };
 
   const handleConfirm = () => {
+    analytics.trackContentCTAClick({
+      buttonType: 'submit',
+      eventUrl: window.location.pathname,
+    });
     postEmail({ email, uniqueId, agree: isAgree });
   };
 

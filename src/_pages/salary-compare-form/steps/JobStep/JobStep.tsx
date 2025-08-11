@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import { Button } from '@/components/common/Button';
 import FormBody from '@/components/common/Form/FormBody';
 import { FormContainer } from '@/components/common/Form/FormContainer';
@@ -13,7 +11,6 @@ import { useStep } from '@/components/steps';
 
 import { useForm } from '@/_pages/salary-compare-form/providers/FormProvider';
 import JobInputDropdown from '@/_pages/salary-compare-form/steps/JobStep/JobInputDropdown';
-import { isProd } from '@/constant/env';
 import { analytics } from '@/features/analytics';
 
 export default function JobStep() {
@@ -21,30 +18,13 @@ export default function JobStep() {
   const { next } = useStep();
 
   const handleContinue = () => {
-    next();
-  };
-
-  useEffect(() => {
-    // 페이지 뷰 추적
-    analytics.trackPageView(
-      '/salary-compare-form?step=job',
-      'salary_comparison_salary',
-      document.referrer || undefined
-    );
-
-    // 사용자 속성 설정
-    analytics.setUserProperties({
-      landing_visit_time: new Date().toISOString(),
-      user_agent: navigator.userAgent.substring(0, 100), // UA 길이 제한
-      screen_resolution: `${screen.width}x${screen.height}`,
+    analytics.trackContentCTAClick({
+      buttonType: 'next',
+      eventUrl: window.location.pathname,
     });
 
-    // 개발 환경에서 디버그 정보 확인
-    if (!isProd) {
-      // eslint-disable-next-line no-console
-      console.log('🚀 직업 입력 페이지 분석 정보:', analytics.getDebugInfo());
-    }
-  }, []);
+    next();
+  };
 
   return (
     <FormContainer>

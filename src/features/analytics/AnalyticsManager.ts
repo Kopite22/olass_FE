@@ -179,35 +179,27 @@ export class AnalyticsManager {
   /**
    * 컨텐츠 CTA 클릭 추적
    */
-  trackContentCTAClick(
-    ctaType: string,
-    contentType: string,
-    position: string,
-    targetUrl?: string
-  ): void {
+  trackContentCTAClick({
+    buttonType,
+    eventType = 'click',
+    eventUrl,
+  }: {
+    buttonType: 'next' | 'share' | 'submit';
+    eventType?: string;
+    eventUrl: string;
+  }): void {
     this.debugLog('컨텐츠 CTA 클릭 추적', {
-      ctaType,
-      contentType,
-      position,
-      targetUrl,
+      buttonType,
+      eventType,
+      eventUrl,
     });
 
     if (this.config.enableGTM) {
-      gtmManager.trackContentCTAClick(
-        ctaType,
-        contentType,
-        position,
-        targetUrl
-      );
+      gtmManager.trackContentCTAClick(buttonType, eventType, eventUrl);
     }
 
     if (this.config.enableGA4) {
-      ga4Manager.trackContentCTAClick(
-        ctaType,
-        contentType,
-        position,
-        targetUrl
-      );
+      ga4Manager.trackContentCTAClick(buttonType, eventType, eventUrl);
     }
   }
 
