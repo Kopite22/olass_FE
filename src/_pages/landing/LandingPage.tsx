@@ -22,7 +22,7 @@ export default function LandingPage() {
     // 페이지 뷰 추적
     analytics.trackPageView(
       '/landing',
-      '나랑 비슷한 사람들은 얼마나 벌까? - 연봉 비교 서비스',
+      'olass_intro',
       document.referrer || undefined
     );
 

@@ -14,11 +14,33 @@ import AgeStep from '@/_pages/asset-management-compare-form/steps/AgeStep';
 import CarOwnershipStep from '@/_pages/asset-management-compare-form/steps/CarOwnershipStep';
 import MonthlyRentStep from '@/_pages/asset-management-compare-form/steps/MonthlyRentStep';
 import SavingsRateStep from '@/_pages/asset-management-compare-form/steps/SavingsRateStep';
+import { analytics } from '@/features/analytics';
 
 const AssetManagementCompareFormPage = () => {
+  const handleShare = () => {
+    analytics.trackContentCTAClick(
+      'primary_cta',
+      'button',
+      'header-share',
+      'https://www.olass.co.kr'
+    );
+
+    navigator.share({
+      title: '내 연봉 위치 확인하기',
+      text: '나랑 비슷한 사람은 얼마나 벌까?',
+      url: 'https://www.olass.co.kr',
+    });
+  };
+
   return (
     <Screen className='gradient-background flex flex-col gap-4'>
-      <GNB trailing={<ShareIcon />} />
+      <GNB
+        trailing={
+          <div onClick={handleShare}>
+            <ShareIcon />
+          </div>
+        }
+      />
       <main className='px-5 pb-6 flex-1 size-full overflow-hidden'>
         <FormProvider>
           <Steps steps={Object.values(FormSteps)} initialStep={FormSteps.Age}>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/common/Button';
 import FormBody from '@/components/common/Form/FormBody';
@@ -14,6 +14,8 @@ import { useStep } from '@/components/steps';
 
 import { useForm } from '@/_pages/asset-management-compare-form/providers/FormProvider';
 import AgeInput from '@/_pages/asset-management-compare-form/steps/AgeStep/AgeInput';
+import { isProd } from '@/constant/env';
+import { analytics } from '@/features/analytics';
 
 export default function AgeStep() {
   const { formData, setFormData } = useForm();
@@ -34,6 +36,28 @@ export default function AgeStep() {
     }
     next();
   };
+
+  useEffect(() => {
+    // 페이지 뷰 추적
+    analytics.trackPageView(
+      '/asset-management-compare-form?step=age',
+      'asset_test_question_age',
+      document.referrer || undefined
+    );
+
+    // 사용자 속성 설정
+    analytics.setUserProperties({
+      landing_visit_time: new Date().toISOString(),
+      user_agent: navigator.userAgent.substring(0, 100), // UA 길이 제한
+      screen_resolution: `${screen.width}x${screen.height}`,
+    });
+
+    // 개발 환경에서 디버그 정보 확인
+    if (!isProd) {
+      // eslint-disable-next-line no-console
+      console.log('🚀 나이 입력 페이지 분석 정보:', analytics.getDebugInfo());
+    }
+  }, []);
 
   return (
     <FormContainer>

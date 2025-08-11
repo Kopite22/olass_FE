@@ -14,6 +14,8 @@
 
 ## 📁 프로젝트 구조
 
+- FSD 변경 / 적용 예정
+
 ```
 src/
 ├── app/                    # Next.js App Router 페이지
