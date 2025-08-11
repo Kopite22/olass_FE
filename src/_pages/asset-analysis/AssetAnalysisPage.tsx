@@ -27,7 +27,6 @@ import {
 import { analytics } from '@/features/analytics';
 
 import { isProd } from '@/constant/env';
-import { analytics } from '@/features/analytics';
 
 const carImage: { [key in ResponseCarList]: string } = {
   publicTransportation: '/images/bus.png',
