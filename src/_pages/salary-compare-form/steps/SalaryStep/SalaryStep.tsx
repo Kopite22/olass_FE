@@ -1,7 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 
 import getUUID from '@/lib/uuid';
 
@@ -16,6 +17,7 @@ import { type ValidationError } from '@/components/common/LocaleNumberInput';
 
 import { useForm } from '@/_pages/salary-compare-form/providers/FormProvider';
 import SalaryInput from '@/_pages/salary-compare-form/steps/SalaryStep/SalaryInput';
+
 import { analytics } from '@/features/analytics';
 
 export default function SalaryStep() {
@@ -55,6 +57,7 @@ export default function SalaryStep() {
     // 결과 페이지로 이동
     router.push(`/salary-result?${searchParams.toString()}`);
   };
+
 
   return (
     <FormContainer>

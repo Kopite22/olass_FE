@@ -2,6 +2,7 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Link from 'next/link';
+import { useEffect } from 'react';
 
 import { buttonVariants } from '@/components/common/Button';
 import { GNB } from '@/components/common/GNB';
@@ -11,6 +12,8 @@ import { Screen } from '@/components/layout/Screen';
 import SalaryComparisonResult from '@/_pages/salary-result/components/SalaryComparisonResult';
 import { assetQueryKeys } from '@/apis/asset';
 import { GetSalaryCompareResultBody } from '@/apis/asset/getSalaryCompareResult';
+import { isProd } from '@/constant/env';
+import { analytics } from '@/features/analytics';
 
 type SalaryResultPageProps = GetSalaryCompareResultBody;
 
@@ -37,6 +40,28 @@ export default function SalaryResultPage(body: SalaryResultPageProps) {
         ? lowerAmount
         : 0,
   };
+
+  useEffect(() => {
+    // 페이지 뷰 추적
+    analytics.trackPageView(
+      '/salary-result',
+      'salary_comparison_result',
+      document.referrer || undefined
+    );
+
+    // 사용자 속성 설정
+    analytics.setUserProperties({
+      landing_visit_time: new Date().toISOString(),
+      user_agent: navigator.userAgent.substring(0, 100), // UA 길이 제한
+      screen_resolution: `${screen.width}x${screen.height}`,
+    });
+
+    // 개발 환경에서 디버그 정보 확인
+    if (!isProd) {
+      // eslint-disable-next-line no-console
+      console.log('🚀 직업 입력 페이지 분석 정보:', analytics.getDebugInfo());
+    }
+  }, []);
 
   return (
     <Screen className='flex flex-col gap-4 bg-neutral-0'>

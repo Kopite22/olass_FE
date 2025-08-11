@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 
 import { cn } from '@/lib/className';
 import getUUID from '@/lib/uuid';
@@ -15,6 +16,7 @@ import FormTitle from '@/components/common/Form/FormTitle';
 
 import { OptionCard } from '@/_pages/asset-management-compare-form/components';
 import { useForm } from '@/_pages/asset-management-compare-form/providers/FormProvider';
+
 import { analytics } from '@/features/analytics';
 
 export default function MonthlyRentStep() {

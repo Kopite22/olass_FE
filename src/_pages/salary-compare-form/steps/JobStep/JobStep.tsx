@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import { Button } from '@/components/common/Button';
 import FormBody from '@/components/common/Form/FormBody';
 import { FormContainer } from '@/components/common/Form/FormContainer';
@@ -11,6 +13,7 @@ import { useStep } from '@/components/steps';
 
 import { useForm } from '@/_pages/salary-compare-form/providers/FormProvider';
 import JobInputDropdown from '@/_pages/salary-compare-form/steps/JobStep/JobInputDropdown';
+
 import { analytics } from '@/features/analytics';
 
 export default function JobStep() {
@@ -25,6 +28,7 @@ export default function JobStep() {
 
     next();
   };
+
 
   return (
     <FormContainer>

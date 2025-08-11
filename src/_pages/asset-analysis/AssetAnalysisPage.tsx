@@ -2,7 +2,8 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 
 import { GNB } from '@/components/common/GNB';
 import ShareNetworkIcon from '@/components/icons/ShareNetworkIcon';
@@ -23,6 +24,9 @@ import {
   ConsumptionGradeParams,
   ResponseCarList,
 } from '@/apis/asset/postConsumptionGrade';
+import { analytics } from '@/features/analytics';
+
+import { isProd } from '@/constant/env';
 import { analytics } from '@/features/analytics';
 
 const carImage: { [key in ResponseCarList]: string } = {
@@ -66,7 +70,7 @@ const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
       url: window.location.href,
     });
   };
-
+    
   return (
     <Screen className='flex flex-col gap-2 overflow-auto modalParent'>
       <div
