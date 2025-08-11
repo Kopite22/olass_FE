@@ -2,8 +2,7 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { GNB } from '@/components/common/GNB';
 import ShareNetworkIcon from '@/components/icons/ShareNetworkIcon';
@@ -24,8 +23,6 @@ import {
   ConsumptionGradeParams,
   ResponseCarList,
 } from '@/apis/asset/postConsumptionGrade';
-
-import { isProd } from '@/constant/env';
 import { analytics } from '@/features/analytics';
 
 const carImage: { [key in ResponseCarList]: string } = {
@@ -58,12 +55,11 @@ const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
   };
 
   const handleShare = () => {
-    analytics.trackContentCTAClick(
-      'primary_cta',
-      'button',
-      'asset-analysis-share',
-      '/asset-analysis'
-    );
+    analytics.trackContentCTAClick({
+      buttonType: 'share',
+      eventUrl: window.location.href,
+    });
+
     navigator.share({
       title: '내 연봉 위치 확인하기',
       text: '나랑 비슷한 사람은 얼마나 벌까?',
@@ -71,31 +67,6 @@ const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
     });
   };
 
-  useEffect(() => {
-    // 페이지 뷰 추적
-    analytics.trackPageView(
-      '/asset-analysis',
-      'transport_grade_result',
-      document.referrer || undefined
-    );
-
-    // 사용자 속성 설정
-    analytics.setUserProperties({
-      landing_visit_time: new Date().toISOString(),
-      user_agent: navigator.userAgent.substring(0, 100), // UA 길이 제한
-      screen_resolution: `${screen.width}x${screen.height}`,
-    });
-
-    // 개발 환경에서 디버그 정보 확인
-    if (!isProd) {
-      // eslint-disable-next-line no-console
-      console.log(
-        '🚀 이동수단 결과 페이지 분석 정보:',
-        analytics.getDebugInfo()
-      );
-    }
-  }, []);
-    
   return (
     <Screen className='flex flex-col gap-2 overflow-auto modalParent'>
       <div
