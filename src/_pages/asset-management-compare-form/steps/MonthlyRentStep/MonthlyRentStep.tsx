@@ -13,6 +13,7 @@ import { FormContainer } from '@/components/common/Form/FormContainer';
 import FormFooter from '@/components/common/Form/FormFooter';
 import FormHeader from '@/components/common/Form/FormHeader';
 import FormTitle from '@/components/common/Form/FormTitle';
+import { useStep } from '@/components/steps';
 
 import { OptionCard } from '@/_pages/asset-management-compare-form/components';
 import { useForm } from '@/_pages/asset-management-compare-form/providers/FormProvider';
@@ -21,6 +22,7 @@ import { analytics } from '@/features/analytics';
 
 export default function MonthlyRentStep() {
   const { formData, setFormData } = useForm();
+  const { next } = useStep();
   const [selectedOption, setSelectedOption] = useState<boolean | null>(
     formData.monthlyRent
   );
@@ -45,6 +47,7 @@ export default function MonthlyRentStep() {
       buttonType: 'submit',
       eventUrl: window.location.pathname,
     });
+    next();
   };
 
   return (
