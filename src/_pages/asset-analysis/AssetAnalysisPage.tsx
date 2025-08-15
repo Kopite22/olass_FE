@@ -2,8 +2,7 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { GNB } from '@/components/common/GNB';
 import ShareNetworkIcon from '@/components/icons/ShareNetworkIcon';
@@ -24,9 +23,6 @@ import {
   ConsumptionGradeParams,
   ResponseCarList,
 } from '@/apis/asset/postConsumptionGrade';
-import { analytics } from '@/features/analytics';
-
-import { isProd } from '@/constant/env';
 
 const carImage: { [key in ResponseCarList]: string } = {
   publicTransportation: '/images/bus.png',
@@ -58,18 +54,13 @@ const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
   };
 
   const handleShare = () => {
-    analytics.trackContentCTAClick({
-      buttonType: 'share',
-      eventUrl: window.location.href,
-    });
-
     navigator.share({
       title: '내 연봉 위치 확인하기',
       text: '나랑 비슷한 사람은 얼마나 벌까?',
       url: window.location.href,
     });
   };
-    
+
   return (
     <Screen className='flex flex-col gap-2 overflow-auto modalParent'>
       <div
