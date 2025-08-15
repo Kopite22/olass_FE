@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@/components/common/Button';
 import FormBody from '@/components/common/Form/FormBody';
@@ -13,8 +13,6 @@ import { useStep } from '@/components/steps';
 
 import { OptionCard } from '@/_pages/asset-management-compare-form/components';
 import { useForm } from '@/_pages/asset-management-compare-form/providers/FormProvider';
-
-import { analytics } from '@/features/analytics';
 
 export default function CarOwnershipStep() {
   const { formData, setFormData } = useForm();
@@ -30,10 +28,6 @@ export default function CarOwnershipStep() {
 
   const handleContinue = () => {
     if (selectedOption !== null) {
-      analytics.trackContentCTAClick({
-        buttonType: 'next',
-        eventUrl: window.location.pathname,
-      });
       next();
     }
   };

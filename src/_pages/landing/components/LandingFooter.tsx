@@ -5,15 +5,10 @@ import { cn } from '@/lib/className';
 import { buttonVariants } from '@/components/common/Button/Button';
 import ArrowRightThickIcon from '@/components/icons/ArrowRightThickIcon';
 
-import { analytics } from '@/features/analytics';
-
 export default function LandingFooter() {
   // CTA 클릭 추적 핸들러
   const handleCTAClick = () => {
-    analytics.trackContentCTAClick({
-      buttonType: 'next',
-      eventUrl: window.location.pathname,
-    });
+    alert('this is for ga');
   };
 
   return (

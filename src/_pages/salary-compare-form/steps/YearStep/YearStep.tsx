@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import { Button } from '@/components/common/Button';
 import FormBody from '@/components/common/Form/FormBody';
 import { FormContainer } from '@/components/common/Form/FormContainer';
@@ -14,8 +12,6 @@ import { useStep } from '@/components/steps';
 
 import { useForm } from '@/_pages/salary-compare-form/providers/FormProvider';
 
-import { analytics } from '@/features/analytics';
-
 const getSliderHeading = (value: number) => {
   if (value === 0) return '신입';
   return `${value}년차`;
@@ -26,10 +22,6 @@ export default function YearStep() {
   const { next } = useStep();
 
   const handleNext = () => {
-    analytics.trackContentCTAClick({
-      buttonType: 'next',
-      eventUrl: window.location.pathname,
-    });
     next();
   };
 

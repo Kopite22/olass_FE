@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { cn } from '@/lib/className';
 import getUUID from '@/lib/uuid';
@@ -16,8 +15,6 @@ import FormTitle from '@/components/common/Form/FormTitle';
 
 import { OptionCard } from '@/_pages/asset-management-compare-form/components';
 import { useForm } from '@/_pages/asset-management-compare-form/providers/FormProvider';
-
-import { analytics } from '@/features/analytics';
 
 export default function MonthlyRentStep() {
   const { formData, setFormData } = useForm();
@@ -41,10 +38,7 @@ export default function MonthlyRentStep() {
   });
 
   const handleSubmit = () => {
-    analytics.trackContentCTAClick({
-      buttonType: 'submit',
-      eventUrl: window.location.pathname,
-    });
+    alert('this is for ga');
   };
 
   return (
@@ -71,7 +65,7 @@ export default function MonthlyRentStep() {
       <FormFooter>
         <Link
           prefetch
-          onClick={(event) => {
+          onClick={() => {
             handleSubmit();
           }}
           className={cn(

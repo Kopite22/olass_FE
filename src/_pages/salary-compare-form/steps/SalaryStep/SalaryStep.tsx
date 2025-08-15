@@ -1,8 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import getUUID from '@/lib/uuid';
 
@@ -17,8 +16,6 @@ import { type ValidationError } from '@/components/common/LocaleNumberInput';
 
 import { useForm } from '@/_pages/salary-compare-form/providers/FormProvider';
 import SalaryInput from '@/_pages/salary-compare-form/steps/SalaryStep/SalaryInput';
-
-import { analytics } from '@/features/analytics';
 
 export default function SalaryStep() {
   const { formData, setFormData } = useForm();
@@ -38,11 +35,6 @@ export default function SalaryStep() {
       return;
     }
 
-    analytics.trackContentCTAClick({
-      buttonType: 'submit',
-      eventUrl: window.location.pathname,
-    });
-
     // UUID 생성
     const uniqueId = getUUID();
 
@@ -57,7 +49,6 @@ export default function SalaryStep() {
     // 결과 페이지로 이동
     router.push(`/salary-result?${searchParams.toString()}`);
   };
-
 
   return (
     <FormContainer>

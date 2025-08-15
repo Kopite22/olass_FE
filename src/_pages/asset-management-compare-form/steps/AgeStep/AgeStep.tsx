@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@/components/common/Button';
 import FormBody from '@/components/common/Form/FormBody';
@@ -14,8 +14,6 @@ import { useStep } from '@/components/steps';
 
 import { useForm } from '@/_pages/asset-management-compare-form/providers/FormProvider';
 import AgeInput from '@/_pages/asset-management-compare-form/steps/AgeStep/AgeInput';
-
-import { analytics } from '@/features/analytics';
 
 export default function AgeStep() {
   const { formData, setFormData } = useForm();
@@ -34,10 +32,7 @@ export default function AgeStep() {
     if (!formData.age) {
       return;
     }
-    analytics.trackContentCTAClick({
-      buttonType: 'next',
-      eventUrl: window.location.pathname,
-    });
+
     next();
   };
 

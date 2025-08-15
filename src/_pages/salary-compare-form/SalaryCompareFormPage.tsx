@@ -13,15 +13,9 @@ import { FormProvider } from '@/_pages/salary-compare-form/providers/FormProvide
 import JobStep from '@/_pages/salary-compare-form/steps/JobStep';
 import SalaryStep from '@/_pages/salary-compare-form/steps/SalaryStep';
 import YearStep from '@/_pages/salary-compare-form/steps/YearStep';
-import { analytics } from '@/features/analytics';
 
 export default function SalaryCompareFormPage() {
   const handleShare = () => {
-    analytics.trackContentCTAClick({
-      buttonType: 'share',
-      eventUrl: window.location.href,
-    });
-
     navigator.share({
       title: '내 연봉 위치 확인하기',
       text: '나랑 비슷한 사람은 얼마나 벌까?',
