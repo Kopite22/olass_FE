@@ -4,6 +4,8 @@ import Image from 'next/image';
 
 import { cn } from '@/lib/className';
 
+import { convertToBillionString } from '@/entities/utils';
+
 type ComparisonResult = 'below' | 'equal' | 'above';
 
 interface SalaryData {
@@ -188,7 +190,7 @@ const SalaryComparisonResult: React.FC<SalaryComparisonResultProps> = ({
                   }}
                   className='text-headline-2 font-semibold'
                 >
-                  {salaryData.userSalary.toLocaleString()}만원
+                  {convertToBillionString(salaryData.userSalary)}
                 </p>
                 <p className='text-label-2 font-medium text-neutral-500'>나</p>
               </div>
@@ -205,7 +207,7 @@ const SalaryComparisonResult: React.FC<SalaryComparisonResultProps> = ({
               />
               <div className='flex flex-col items-center'>
                 <p className='text-headline-2 font-semibold text-neutral-900'>
-                  {salaryData.averageSalary.toLocaleString()}만원
+                  {convertToBillionString(salaryData.averageSalary)}
                 </p>
                 <p className='text-label-2 font-medium text-neutral-400'>
                   동일 연차 평균

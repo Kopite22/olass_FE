@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import { Button } from '@/components/common/Button';
 import FormBody from '@/components/common/Form/FormBody';
 import { FormContainer } from '@/components/common/Form/FormContainer';
@@ -13,8 +11,6 @@ import { useStep } from '@/components/steps';
 
 import { useForm } from '@/_pages/asset-management-compare-form/providers/FormProvider';
 
-import { analytics } from '@/features/analytics';
-
 const getSliderHeading = (value: number) => {
   return `${value}%`;
 };
@@ -24,10 +20,6 @@ export default function SavingsRateStep() {
   const { next } = useStep();
 
   const handleNext = () => {
-    analytics.trackContentCTAClick({
-      buttonType: 'next',
-      eventUrl: window.location.pathname,
-    });
     next();
   };
 
