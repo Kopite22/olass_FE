@@ -37,10 +37,6 @@ export default function MonthlyRentStep() {
     saveRate: formData.savingsRate?.toString() ?? '',
   });
 
-  const handleSubmit = () => {
-    alert('this is for ga');
-  };
-
   return (
     <FormContainer>
       <FormHeader>
@@ -63,25 +59,24 @@ export default function MonthlyRentStep() {
         </div>
       </FormBody>
       <FormFooter>
-        <Link
-          prefetch
-          onClick={() => {
-            handleSubmit();
-          }}
-          className={cn(
-            buttonVariants({
-              variant: 'solid',
-              color: 'primary',
-              size: 'fullWidth',
-              isFullWidth: true,
-            })
-          )}
-          href={`/asset-analysis?${searchParams.toString()}`}
-        >
-          <div className='flex items-center justify-center gap-1.5'>
-            계속하기
-          </div>
-        </Link>
+        <div data-gtm-id='asset_test_question_monthly_rent'>
+          <Link
+            prefetch
+            className={cn(
+              buttonVariants({
+                variant: 'solid',
+                color: 'primary',
+                size: 'fullWidth',
+                isFullWidth: true,
+              })
+            )}
+            href={`/asset-analysis?${searchParams.toString()}`}
+          >
+            <div className='flex items-center justify-center gap-1.5'>
+              계속하기
+            </div>
+          </Link>
+        </div>
       </FormFooter>
     </FormContainer>
   );

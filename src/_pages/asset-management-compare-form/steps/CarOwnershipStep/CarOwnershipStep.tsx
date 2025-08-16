@@ -60,6 +60,7 @@ export default function CarOwnershipStep() {
           onClick={handleContinue}
           disabled={selectedOption === null}
           isFullWidth
+          dataGtmId='asset_test_question_own_car'
         >
           계속하기
         </Button>

@@ -63,7 +63,7 @@ export default function SalaryResultPage(body: SalaryResultPageProps) {
               몇 가지 질문만 더, 자산관리 등급을 알려드려요
             </p>
 
-            <div className='w-full px-5'>
+            <div className='w-full px-5' data-gtm-id='salary_comparison_result'>
               <Link
                 className={buttonVariants({ size: 'fullWidth' })}
                 href='/asset-management-compare-form'

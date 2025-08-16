@@ -118,6 +118,7 @@ interface ButtonProps
   children: ReactNode;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  dataGtmId?: string;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -131,6 +132,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       leftIcon,
       rightIcon,
+      dataGtmId,
       ...props
     }: ButtonProps,
     ref
@@ -140,6 +142,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className={cn(
         buttonVariants({ variant, color, size, isFullWidth, className })
       )}
+      data-gtm-id={dataGtmId}
       {...props}
     >
       {leftIcon && <span className='mr-1.5'>{leftIcon}</span>}

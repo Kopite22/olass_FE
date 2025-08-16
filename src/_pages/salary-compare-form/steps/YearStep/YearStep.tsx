@@ -47,7 +47,12 @@ export default function YearStep() {
         />
       </FormBody>
       <FormFooter>
-        <Button size='large' onClick={handleNext} isFullWidth>
+        <Button
+          size='large'
+          onClick={handleNext}
+          isFullWidth
+          dataGtmId='salary_comparison_experience'
+        >
           계속하기
         </Button>
       </FormFooter>

@@ -57,6 +57,7 @@ export default function AgeStep() {
           isFullWidth
           disabled={!isValid}
           onClick={handleSubmit}
+          dataGtmId='asset_test_question_age'
         >
           다음 단계로
         </Button>

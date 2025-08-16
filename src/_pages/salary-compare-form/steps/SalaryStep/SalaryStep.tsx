@@ -69,6 +69,7 @@ export default function SalaryStep() {
           onClick={handleSubmit}
           disabled={!isValid}
           isFullWidth
+          dataGtmId='salary_comparison_salary'
         >
           내 연봉 위치 확인하기
         </Button>

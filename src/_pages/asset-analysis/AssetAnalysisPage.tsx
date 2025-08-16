@@ -70,7 +70,7 @@ const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
       >
         <GNB
           trailing={
-            <div onClick={handleShare}>
+            <div onClick={handleShare} data-gtm-id='share_result'>
               <ShareNetworkIcon />
             </div>
           }

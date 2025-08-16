@@ -48,7 +48,12 @@ export default function SavingsRateStep() {
         />
       </FormBody>
       <FormFooter>
-        <Button size='large' onClick={handleNext} isFullWidth>
+        <Button
+          size='large'
+          onClick={handleNext}
+          isFullWidth
+          dataGtmId='asset_test_question_invest_ratio'
+        >
           계속하기
         </Button>
       </FormFooter>

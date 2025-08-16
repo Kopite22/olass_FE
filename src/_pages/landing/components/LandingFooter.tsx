@@ -11,7 +11,7 @@ export default function LandingFooter() {
       <p className='text-label-1 font-medium text-neutral-500 text-center'>
         지금까지 <span className='text-primary-500'>1,273</span>명이 확인했어요
       </p>
-      <div className='w-full px-5 sm:px-[20px]' data-gtm-id='test'>
+      <div className='w-full px-5 sm:px-[20px]' data-gtm-id='olass_intro'>
         <Link
           prefetch
           className={cn(
