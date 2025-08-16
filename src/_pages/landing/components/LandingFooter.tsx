@@ -6,10 +6,6 @@ import { buttonVariants } from '@/components/common/Button/Button';
 import ArrowRightThickIcon from '@/components/icons/ArrowRightThickIcon';
 
 export default function LandingFooter() {
-  // CTA 클릭 추적 핸들러
-  const handleCTAClick = () => {
-    alert('this is for ga');
-  };
 
   return (
     <div className='flex flex-col items-center gap-3 w-full mb-[51px]'>
@@ -28,7 +24,7 @@ export default function LandingFooter() {
             })
           )}
           href='/salary-compare-form'
-          onClick={handleCTAClick}
+          data-gtm-id='test'
         >
           <div className='flex items-center justify-center gap-1.5'>
             1분 안에 내 연봉 위치 보기
