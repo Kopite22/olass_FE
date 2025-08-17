@@ -3,8 +3,8 @@ import { GetSalaryCompareResultBody } from '@/apis/asset/getSalaryCompareResult'
 
 interface PageProps {
   searchParams: {
-    unique_id?: string;
-    job_id?: string;
+    uniqueId?: string;
+    jobId?: string;
     experience?: string;
     salary?: string;
   };
@@ -13,8 +13,8 @@ interface PageProps {
 export default async function Page({ searchParams }: PageProps) {
   // URL 파라미터 검증
   if (
-    !searchParams.unique_id ||
-    !searchParams.job_id ||
+    !searchParams.uniqueId ||
+    !searchParams.jobId ||
     !searchParams.experience ||
     !searchParams.salary
   ) {
@@ -22,8 +22,8 @@ export default async function Page({ searchParams }: PageProps) {
   }
 
   const requestBody: GetSalaryCompareResultBody = {
-    unique_id: searchParams.unique_id,
-    job_id: parseInt(searchParams.job_id),
+    uniqueId: searchParams.uniqueId,
+    jobId: parseInt(searchParams.jobId),
     experience: parseInt(searchParams.experience, 10),
     salary: parseInt(searchParams.salary, 10),
   };

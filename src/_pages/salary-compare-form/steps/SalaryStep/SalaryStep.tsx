@@ -40,8 +40,8 @@ export default function SalaryStep() {
 
     // URL 파라미터로 폼 데이터 전달
     const searchParams = new URLSearchParams({
-      unique_id: uniqueId,
-      job_id: formData.job.jobId,
+      uniqueId: uniqueId,
+      jobId: formData.job.jobId,
       experience: formData.year.toString(),
       salary: formData.salary.toString(),
     });

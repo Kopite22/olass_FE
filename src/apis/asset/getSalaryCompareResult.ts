@@ -47,8 +47,8 @@ const inPort = (rawJob: RawSalaryCompareResult): SalaryCompareResult => {
 };
 
 interface GetSalaryCompareResultBody {
-  unique_id: string;
-  job_id: number;
+  uniqueId: string;
+  jobId: number;
   experience: number;
   salary: number;
 }
