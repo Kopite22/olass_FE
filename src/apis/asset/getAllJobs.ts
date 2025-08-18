@@ -29,9 +29,7 @@ const inPort = (rawJob: RawJob[]): Job[] => {
 };
 
 const getAllJobs = async () => {
-  const response = await assetApiInstance.get<Response>('jobs', {
-    cache: 'force-cache',
-  });
+  const response = await assetApiInstance.get<Response>('jobs');
 
   const rawJobs = (await response.json()).data.items;
 
