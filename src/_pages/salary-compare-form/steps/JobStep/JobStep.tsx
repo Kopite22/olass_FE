@@ -38,7 +38,7 @@ export default function JobStep() {
           onClick={handleContinue}
           disabled={formData.job === null}
           isFullWidth
-          dataGtmId='salary_comparison_salary'
+          dataGtmId='salary_comparison_job'
         >
           {formData.job === null ? '정보를 입력해주세요' : '계속하기'}
         </Button>
