@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-import { HTTPError } from 'ky';
 import Link from 'next/link';
 import ChevronRight from 'public/svg/ChevronRight.svg';
 import { useEffect, useState } from 'react';
@@ -13,16 +12,16 @@ interface Props {
   email: string;
   uniqueId: string;
   onClose: () => void;
+  onSubmitCallback: () => void;
 }
 
-const ModalAgree = ({ email, uniqueId, onClose }: Props) => {
+const ModalAgree = ({ email, uniqueId, onClose, onSubmitCallback }: Props) => {
   const [isAgree, setIsAgree] = useState(false);
   const { mutate: postEmail } = useMutation({
     mutationFn: (params: PostEmailAgreeParams) => postEmailAgree(params),
-    onSuccess: () => {
-      onClose();
-    },
-    onError: (_: HTTPError) => {
+
+    onSettled: () => {
+      onSubmitCallback();
       onClose();
     },
   });

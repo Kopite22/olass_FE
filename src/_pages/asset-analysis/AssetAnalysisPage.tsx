@@ -42,8 +42,13 @@ const carSummary: { [key in ResponseCarList]: React.ReactNode } = {
 
 const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
   const [email, setEmail] = useState('');
+  const [isShowEmailForm, setIsShowEmailForm] = useState(true);
   const [isShowModal, setIsShowModal] = useState(false);
   const { data } = useSuspenseQuery(assetQueryKeys.postConsumptionGrade(props));
+
+  const submitCallback = () => {
+    setIsShowEmailForm(false);
+  };
 
   const handleModal = () => {
     setIsShowModal((prev) => !prev);
@@ -144,13 +149,16 @@ const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
             email={email}
             uniqueId={props.uniqueId}
             onClose={handleModal}
+            onSubmitCallback={submitCallback}
           />
         ) : (
-          <EmailForm
-            email={email}
-            onChangeEmail={handleEmailChange}
-            onShowModal={handleModal}
-          />
+          isShowEmailForm && (
+            <EmailForm
+              email={email}
+              onChangeEmail={handleEmailChange}
+              onShowModal={handleModal}
+            />
+          )
         )}
       </div>
     </Screen>
