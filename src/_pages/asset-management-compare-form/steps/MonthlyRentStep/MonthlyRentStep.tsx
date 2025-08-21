@@ -35,7 +35,6 @@ export default function MonthlyRentStep() {
     hasCar: formData.carOwnership?.toString() ?? '',
     isMonthlyRent: formData.monthlyRent?.toString() ?? '',
     saveRate: formData.savingsRate?.toString() ?? '',
-    shared: 'false',
   });
 
   return (
