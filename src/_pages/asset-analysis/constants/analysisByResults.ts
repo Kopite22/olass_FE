@@ -1,4 +1,4 @@
-import carColor from '@/_pages/asset-analysis/constants/carColor';
+import { carColor } from '@/_pages/asset-analysis/constants/carColor';
 import { ResponseCarList } from '@/apis/asset';
 
 export const analysisByResults: Record<

@@ -79,7 +79,7 @@ const ModalAgree = ({ email, uniqueId, onClose, onSubmitCallback }: Props) => {
           onClick={handleConfirm}
           dataGtmId='agree_terms'
         >
-          동의 하고 자산 관리 팁 받아보기
+          동의하고 자산 관리 팁 받아보기
         </Button>
       </div>
     </div>

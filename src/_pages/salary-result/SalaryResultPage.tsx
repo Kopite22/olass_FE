@@ -14,6 +14,7 @@ import { GetSalaryCompareResultBody } from '@/apis/asset/getSalaryCompareResult'
 
 type SalaryResultPageProps = GetSalaryCompareResultBody;
 
+
 export default function SalaryResultPage(body: SalaryResultPageProps) {
   const { data } = useSuspenseQuery(
     assetQueryKeys.getSalaryCompareResult(body)

@@ -1,12 +1,11 @@
 'use client';
 
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { cn } from '@/lib/className';
 import getUUID from '@/lib/uuid';
 
-import { buttonVariants } from '@/components/common/Button/Button';
+import { Button } from '@/components/common/Button/Button';
 import FormBody from '@/components/common/Form/FormBody';
 import { FormContainer } from '@/components/common/Form/FormContainer';
 import FormFooter from '@/components/common/Form/FormFooter';
@@ -17,6 +16,8 @@ import { OptionCard } from '@/_pages/asset-management-compare-form/components';
 import { useForm } from '@/_pages/asset-management-compare-form/providers/FormProvider';
 
 export default function MonthlyRentStep() {
+  const router = useRouter();
+
   const { formData, setFormData } = useForm();
   const [selectedOption, setSelectedOption] = useState<boolean | null>(
     formData.monthlyRent
@@ -36,6 +37,10 @@ export default function MonthlyRentStep() {
     isMonthlyRent: formData.monthlyRent?.toString() ?? '',
     saveRate: formData.savingsRate?.toString() ?? '',
   });
+
+  const handleNext = () => {
+    router.push(`/asset-analysis?${searchParams.toString()}`);
+  };
 
   return (
     <FormContainer>
@@ -59,24 +64,15 @@ export default function MonthlyRentStep() {
         </div>
       </FormBody>
       <FormFooter>
-        <div data-gtm-id='asset_test_question_monthly_rent'>
-          <Link
-            prefetch
-            className={cn(
-              buttonVariants({
-                variant: 'solid',
-                color: 'primary',
-                size: 'fullWidth',
-                isFullWidth: true,
-              })
-            )}
-            href={`/asset-analysis?${searchParams.toString()}`}
-          >
-            <div className='flex items-center justify-center gap-1.5'>
-              계속하기
-            </div>
-          </Link>
-        </div>
+        <Button
+          size='large'
+          onClick={handleNext}
+          isFullWidth
+          disabled={selectedOption === null}
+          dataGtmId='asset_test_question_monthly_rent'
+        >
+          결과 확인하기
+        </Button>
       </FormFooter>
     </FormContainer>
   );

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import carColor from '@/_pages/asset-analysis/constants/carColor';
+import { carColor } from '@/_pages/asset-analysis/constants/carColor';
 
 interface Props {
   car: 'avante' | 'publicTransportation';
@@ -8,7 +8,7 @@ interface Props {
 
 const SummaryLower = ({ car }: Props) => {
   return (
-    <div className='flex flex-col w-full h-25 pt-1 pb-5 px-10 rounded-3xl mx-auto mt-4 border-1 border-neutral-50 shadow-[0px_0px_12px_0px_#FF6D6D29]'>
+    <div className='flex flex-col min-h-25 w-full pt-1 pb-5 px-10 rounded-3xl mx-auto mt-4 border-1 border-neutral-50 shadow-[0px_0px_12px_0px_#FF6D6D29] bg-neutral-0'>
       <div className='m-auto'>
         <div className='flex'>
           <Image src='/images/boom.png' alt='boom' width={51} height={51} />
