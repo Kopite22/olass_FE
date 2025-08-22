@@ -1,4 +1,4 @@
-import carColor from '@/_pages/asset-analysis/constants/carColor';
+import { carColor } from '@/_pages/asset-analysis/constants/carColor';
 
 interface Props {
   car: 'benz' | 'porsche';
@@ -6,7 +6,7 @@ interface Props {
 
 const SummaryUpper = ({ car }: Props) => {
   return (
-    <div className='flex h-25 px-10 rounded-3xl w-full text-center mt-4 border-1 border-neutral-50 shadow-[0px_0px_12px_0px_#4DAF0229]'>
+    <div className='flex min-h-25 justify-center items-center px-10 rounded-3xl w-full text-center mt-4 border-1 border-neutral-50 shadow-[0px_0px_12px_0px_#4DAF0229] bg-neutral-0'>
       {car === 'benz' ? (
         <p className='text-[20px] font-bold m-auto'>
           지금처럼 하면{' '}

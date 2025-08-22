@@ -40,7 +40,7 @@ const IfKeep = ({ car }: Props) => {
         <div className='flex flex-col gap-6'>
           {analysisByResults[car].ifKeep.map((item, idx) => (
             <div key={car} className='flex gap-4'>
-              <div className='w-[22px] h-[22px] text-center rounded-sm bg-neutral-50 text-neutral-500'>
+              <div className='w-[22px] h-[22px] text-[13px] font-700 rounded-sm bg-neutral-50 text-neutral-500 shrink-0 flex items-center justify-center'>
                 {idx + 1}
               </div>
               <div className='flex flex-col'>
