@@ -136,7 +136,7 @@ const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
           <div className='flex flex-col gap-6'>
             {analysisByResults[data.car].nowCanChange.map((item, idx) => (
               <div key={item.title} className='flex gap-4'>
-                <span className='w-[22px] h-[22px] text-[13px] font-700 rounded-sm bg-neutral-50 text-neutral-500 shrink-0 flex items-center justify-center'>
+                <span className='w-[22px] h-[22px] text-[13px] font-bold rounded-sm bg-neutral-50 text-neutral-500 shrink-0 flex items-center justify-center'>
                   {idx + 1}
                 </span>
                 <div className='flex flex-col'>
