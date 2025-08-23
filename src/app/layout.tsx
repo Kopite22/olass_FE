@@ -1,11 +1,11 @@
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Metadata } from 'next';
-import Script from 'next/script';
 import * as React from 'react';
 
 import '@/styles/globals.css';
 
 import GoogleAnalytics from '@/lib/GoogleAnalytics';
+import GoogleTagManager from '@/lib/GoogleTagManager';
 
 import { siteConfig } from '@/constant/config';
 import QueryClientProvider from '@/providers/QueryClientProvider';
@@ -34,12 +34,14 @@ export const metadata: Metadata = {
     siteName: siteConfig.title,
     images: [
       {
-        url: '/images/og.png',
+        url: `${siteConfig.url}/images/og.png`, // 절대 경로로 변경
         alt: 'og Image',
+        width: 1200,
+        height: 630,
       },
     ],
     type: 'website',
-    locale: 'en_US',
+    locale: 'ko_KR', // 한국어로 변경
   },
   twitter: {
     card: 'summary_large_image',
@@ -47,7 +49,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: '/images/og.png',
+        url: `${siteConfig.url}/images/og.png`, // 절대 경로로 변경
         alt: 'og Image',
       },
     ],
@@ -61,46 +63,13 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <head>
-        <meta property='og:title' content='내 연봉 위치 확인하기' />
-        <meta
-          property='og:description'
-          content='나랑 비슷한 사람은 얼마나 벌까?'
-        />
-        <meta property='og:image' content='/images/og.png' />
-      </head>
       <body className='bg-neutral-25 w-dvw h-dvh flex items-center justify-center'>
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src='https://www.googletagmanager.com/ns.html?id=GTM-N9XCHTKX'
-            height='0'
-            width='0'
-            style={{ display: 'none', visibility: 'hidden' }}
-          ></iframe>
-        </noscript>
-
+        <GoogleTagManager />
         <QueryClientProvider>
           {children}
           <ReactQueryDevtools initialIsOpen />
         </QueryClientProvider>
-
         <GoogleAnalytics />
-
-        {/* Google Tag Manager */}
-        <Script
-          id='gtm'
-          strategy='afterInteractive'
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-N9XCHTKX');
-            `,
-          }}
-        />
       </body>
     </html>
   );
