@@ -13,13 +13,14 @@ import { FormProvider } from '@/_pages/salary-compare-form/providers/FormProvide
 import JobStep from '@/_pages/salary-compare-form/steps/JobStep';
 import SalaryStep from '@/_pages/salary-compare-form/steps/SalaryStep';
 import YearStep from '@/_pages/salary-compare-form/steps/YearStep';
+import { siteConfig } from '@/constant/config';
 
 export default function SalaryCompareFormPage() {
   const handleShare = () => {
     navigator.share({
-      title: '내 연봉 위치 확인하기',
-      text: '나랑 비슷한 사람은 얼마나 벌까?',
-      url: 'https://www.olass.co.kr',
+      title: siteConfig.title,
+      text: siteConfig.description,
+      url: siteConfig.url,
     });
   };
   return (

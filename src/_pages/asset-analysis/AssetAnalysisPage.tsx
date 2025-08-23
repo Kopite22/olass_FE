@@ -24,6 +24,7 @@ import {
   ConsumptionGradeParams,
   ResponseCarList,
 } from '@/apis/asset/postConsumptionGrade';
+import { siteConfig } from '@/constant/config';
 
 const carImage: { [key in ResponseCarList]: string } = {
   publicTransportation: '/images/bus.png',
@@ -63,8 +64,8 @@ const AssetAnalysisPage = (props: ConsumptionGradeParams) => {
 
   const handleShare = () => {
     navigator.share({
-      title: '내 연봉 위치 확인하기',
-      text: '나랑 비슷한 사람은 얼마나 벌까?',
+      title: siteConfig.title,
+      text: siteConfig.description,
       url: window.location.href + '&shared=true',
     });
   };

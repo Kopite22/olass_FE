@@ -14,13 +14,14 @@ import AgeStep from '@/_pages/asset-management-compare-form/steps/AgeStep';
 import CarOwnershipStep from '@/_pages/asset-management-compare-form/steps/CarOwnershipStep';
 import MonthlyRentStep from '@/_pages/asset-management-compare-form/steps/MonthlyRentStep';
 import SavingsRateStep from '@/_pages/asset-management-compare-form/steps/SavingsRateStep';
+import { siteConfig } from '@/constant/config';
 
 const AssetManagementCompareFormPage = () => {
   const handleShare = () => {
     navigator.share({
-      title: '내 연봉 위치 확인하기',
-      text: '나랑 비슷한 사람은 얼마나 벌까?',
-      url: 'https://www.olass.co.kr',
+      title: siteConfig.title,
+      text: siteConfig.description,
+      url: siteConfig.url,
     });
   };
 
