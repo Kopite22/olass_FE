@@ -1,5 +1,8 @@
+import { Metadata } from 'next';
+
 import AssetAnalysisPage from '@/_pages/asset-analysis/AssetAnalysisPage';
 import { ConsumptionGradeParams } from '@/apis/asset/postConsumptionGrade';
+import { generateCommonMetadata } from '@/entities/utils/generateMetadata';
 
 interface PageProps {
   searchParams: {
@@ -9,6 +12,15 @@ interface PageProps {
     isMonthlyRent?: string;
     saveRate?: string;
   };
+}
+
+export async function generateMetadata({
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  return generateCommonMetadata({
+    path: `/asset-analysis?${searchParams.toString()}`,
+    searchParams,
+  });
 }
 
 const Page = ({ searchParams }: PageProps) => {
